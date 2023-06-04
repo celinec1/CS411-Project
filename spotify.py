@@ -28,7 +28,7 @@ else:
 
 url = 'https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb'
 headers = {
-    'Authorization': 'Bearer BQBgj_QEsMbvr9Mul8yD5_BohTmZ__havoYedSME7uuPqqYkCMa2BJNfqyzFBz7ECLuOa3kAeUezsPvTPHJhBX_RHg_4_3gYoS8HOAQbAinceVDMCmE'
+    'Authorization': 'Bearer AccessCode'
 }
 
 
