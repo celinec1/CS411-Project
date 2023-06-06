@@ -14,6 +14,24 @@ def get_current_location(api_key):
         print("Error: Failed to retrieve current location.")
         return None
 
+def get_address(latitude, longitude, api_key):
+    url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={latitude},{longitude}&key={api_key}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        
+        if data["results"]:
+            address = data["results"][0]["formatted_address"]
+            return address
+        else:
+            print("Error: No results found for the provided coordinates.")
+    else:
+        print("Error: Failed to retrieve address.")
+    
+    return None
+
+
 api_key = "AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M"
 
 # get + print location
@@ -22,3 +40,8 @@ if location:
     latitude, longitude = location
     print("Latitude:", latitude)
     print("Longitude:", longitude)
+
+if location:
+    address = get_address(latitude, longitude, api_key)
+    if address:
+        print("Address:", address)
