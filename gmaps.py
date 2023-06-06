@@ -1,7 +1,7 @@
 import googlemaps
 from datetime import datetime
 
-gmaps = googlemaps.Client(key='AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M')
+gmaps = googlemaps.Client(key='')
 
 # Geocoding an address
 geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
