@@ -32,7 +32,7 @@ def get_address(latitude, longitude, api_key):
     return None
 
 
-api_key = "AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M"
+api_key = ''
 
 # get + print location
 location = get_current_location(api_key)
