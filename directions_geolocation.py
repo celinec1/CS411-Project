@@ -16,6 +16,8 @@ geo_params = {
 # request geolocation API
 geo_response = requests.get(geo_url, params=geo_params)
 
+print(geo_response.status_code)
+
 # json data from response
 data = geo_response.json()
 
@@ -47,6 +49,8 @@ direct_params = {
 
 # request directions API
 response = requests.get(url, params=direct_params)
+
+print(response.status_code)
 
 json_data = response.json()
 
