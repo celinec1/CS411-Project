@@ -1,8 +1,8 @@
 import requests
 import geolocate
 
-api_key = ""
-w_api_key = ""
+api_key = "c4a56e33ea2e4d26801202756230506"
+w_api_key = "AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M"
 
 def get_weather(latitude, longitude, api_key):
     url = f"https://api.weatherapi.com/v1/current.json?q={latitude},{longitude}&key={api_key}"
