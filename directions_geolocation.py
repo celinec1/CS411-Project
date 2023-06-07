@@ -2,7 +2,7 @@ import requests
 import googlemaps
 
 
-key = 'AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M'
+key = 
 
 gmaps = googlemaps.Client(key)
 
