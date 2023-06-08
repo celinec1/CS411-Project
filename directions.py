@@ -1,7 +1,9 @@
 import requests
 
 #api key
-api_key = ''
+api_key = 'AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M'
+start = '808 Commonwealth Ave Boston, MA'
+destination = '528 Beacon St Boston, MA'
 
 def get_directions_duration(start, destination, mode, api_key):
     if (validate_address(start, api_key) != (None,None)) and (validate_address(destination, api_key) != (None, None)):
@@ -27,7 +29,7 @@ def get_directions_duration(start, destination, mode, api_key):
     else:
         print("Error: Invalid Address")
     
-    return None
+    #return None
 
 def validate_address(address, api_key): #returns tuple of formatted address and zip code
     url = f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api_key}"
@@ -50,16 +52,16 @@ def validate_address(address, api_key): #returns tuple of formatted address and 
     else:
         print("Error: Failed to validate address.")
 
-    return None, None
+    #return None, None
 
-#put in start and destination (city, state) format as of rn
-start = '808 Commonwealth Ave Boston, MA'
-destination = '528 Beacon St Boston, MA'
+def route_durations(start, destination, api_key):
+    modes = ['driving', 'bicycling', 'transit', 'walking']
+    for mode in modes:
+        directions_durations = get_directions_duration(start, destination, mode, api_key)
+        if directions_durations:
+            for modes, duration in directions_durations.items(): #this displays "transit" as "walking" not sure why
+                if mode != None:
+                    print(f"{mode.capitalize()}: {duration}") #prints mode from the list and not the dictionary
 
-# not sure if this part is busted or the function
-modes = ['driving', 'bicycling', 'transit', 'walking']
-for mode in modes:
-    directions_durations = get_directions_duration(start, destination, mode, api_key)
-    if directions_durations:
-        for modes, duration in directions_durations.items(): #this displays "transit" as "walking" not sure why
-            print(f"{mode.capitalize()}: {duration}") #prints mode from the list and not the dictionary
+
+print(route_durations(start, destination, api_key))
