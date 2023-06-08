@@ -1,12 +1,12 @@
 import requests
-import geolocate
+import directions
 
 #pulls data from weatherapi, and using the geolocate call it is able to pull the data from the location the person is at
-api_key = ""
-g_api_key = ""
+api_key = "c4a56e33ea2e4d26801202756230506"
+g_api_key = "AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M"
 
-def get_weather(latitude, longitude, api_key):
-    url = f"https://api.weatherapi.com/v1/current.json?q={latitude},{longitude}&key={api_key}"
+def get_weather(zip, api_key):
+    url = f"https://api.weatherapi.com/v1/current.json?q={zip}&key={api_key}"
     response = requests.get(url)
     data = response.json()
 
@@ -14,13 +14,12 @@ def get_weather(latitude, longitude, api_key):
         print(f"Error: {data['error']['message']}")
     else:
         current_weather = data['current']
-        location = f"{latitude}, {longitude}"
+        location = f"{zip}"
         print(f"Weather at {location}:")
         print(f"Temperature: {current_weather['temp_f']}°F")
         print(f"Condition: {current_weather['condition']['text']}")
 
 # retrieve latitude and longitude from geolocate module
-location = geolocate.get_current_location(g_api_key)
-if location:
-    latitude, longitude = location
-    get_weather(latitude, longitude, api_key)
+zip = (directions.validate_address(directions.start, g_api_key))[1]
+if zip:
+    get_weather(zip, api_key)
