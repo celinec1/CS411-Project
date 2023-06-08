@@ -68,4 +68,3 @@ if access_token:
         print('Error retrieving user profile:', profile_data)
 else:
     print('Access token not obtained.')
-
