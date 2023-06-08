@@ -1,28 +1,31 @@
 import requests
 
 #api key
-api_key = 'AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M'
+api_key = ''
 
 def get_directions_duration(start, destination, mode, api_key):
-    url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start}&destination={destination}&mode={mode}&key={api_key}"
-    response = requests.get(url)
-    
-    if response.status_code == 200:
-        data = response.json()
+    if (validate_address(start, api_key) != (None,None)) and (validate_address(destination, api_key) != (None, None)):
+        url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start}&destination={destination}&mode={mode}&key={api_key}"
+        response = requests.get(url)
         
-        if data["status"] == "OK":
-            durations = {}
-            for route in data["routes"]:
-                for leg in route["legs"]:
-                    mode = leg["steps"][0]["travel_mode"]
-                    duration = leg["duration"]["text"]
-                    durations[mode] = duration
+        if response.status_code == 200:
+            data = response.json()
             
-            return durations
+            if data["status"] == "OK":
+                durations = {}
+                for route in data["routes"]:
+                    for leg in route["legs"]:
+                        mode = leg["steps"][0]["travel_mode"]
+                        duration = leg["duration"]["text"]
+                        durations[mode] = duration
+                
+                return durations
+            else:
+                print(f"Error: {data['status']}")
         else:
-            print(f"Error: {data['status']}")
+            print("Error: Failed to retrieve directions.")
     else:
-        print("Error: Failed to retrieve directions.")
+        print("Error: Invalid Address")
     
     return None
 
@@ -50,8 +53,8 @@ def validate_address(address, api_key): #returns tuple of formatted address and 
     return None, None
 
 #put in start and destination (city, state) format as of rn
-start = ''
-destination = ''
+start = '808 Commonwealth Ave Boston, MA'
+destination = '528 Beacon St Boston, MA'
 
 # not sure if this part is busted or the function
 modes = ['driving', 'bicycling', 'transit', 'walking']
