@@ -1,6 +1,7 @@
 import requests
 import geolocate
 
+#pulls data from weatherapi, and using the geolocate call it is able to pull the data from the location the person is at
 api_key = ""
 w_api_key = ""
 
