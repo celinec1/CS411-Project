@@ -23,14 +23,14 @@ def get_directions_duration(start, destination, api_key):
     
     return None
 
-# Provide your Google Maps API key
+#api key
 api_key = ''
 
-# Provide the starting point and destination
+#put in start and destination (city, state) format as of rn
 start = 'Boston, MA'
 destination = 'New York, NY'
 
-# Get the total duration for each transportation mode
+# not sure if this part is busted or the function
 directions_durations = get_directions_duration(start, destination, api_key)
 if directions_durations:
     for mode, duration in directions_durations.items():
