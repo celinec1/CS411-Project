@@ -22,15 +22,15 @@
 //   );
 // }
 
+import React from 'react';
 import "./App.css";
-import LoginNavbar from './login_navbar';
+import Home_page from './Home_page';
 
 function App() {
   return (
     <div className="App">
-      <LoginNavbar />
+      <Home_page />
       <header className="App-header"> </header>
-      
     </div>
   );
 }
