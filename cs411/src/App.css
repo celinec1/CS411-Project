@@ -14,7 +14,7 @@
 } */
 
 .App-header {
-  background: linear-gradient(to right, #5653c5, #1e1397); /* Replace the color values with your desired gradient */
+  background: linear-gradient(to right, #1f1f20, #101010); /* Replace the color values with your desired gradient */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
