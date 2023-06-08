@@ -29,7 +29,7 @@ def get_directions_duration(start, destination, mode, api_key):
     else:
         print("Error: Invalid Address")
     
-    #return None
+    return None
 
 def validate_address(address, api_key): #returns tuple of formatted address and zip code
     url = f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api_key}"
@@ -52,7 +52,7 @@ def validate_address(address, api_key): #returns tuple of formatted address and 
     else:
         print("Error: Failed to validate address.")
 
-    #return None, None
+    return None, None
 
 def route_durations(start, destination, api_key):
     modes = ['driving', 'bicycling', 'transit', 'walking']
