@@ -5,9 +5,9 @@ from urllib.parse import urlencode, urlparse, parse_qs
 
 # Step 1: Authorization Request
 
-client_id = '3a35c0bb12b54e1f8f0602a408bc6bf3'
+client_id =
 
-client_secret = '17391461037d4d1788e03c089bd4319d'
+client_secret = 
 
 redirect_uri = 'http://localhost:8000/callback'
 scope = 'user-library-read playlist-modify-private'
