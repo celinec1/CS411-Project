@@ -2,27 +2,28 @@
 
 import base64
 from json import JSONDecodeError
+import random
 from urllib.error import HTTPError
 import requests
 
 
 
-client_id = 
-client_secret = 
+client_id = '3a35c0bb12b54e1f8f0602a408bc6bf3'
+client_secret = '17391461037d4d1788e03c089bd4319d'
 
 
 auth_url = 'https://accounts.spotify.com/api/token'
 auth_data = {
     'grant_type': 'client_credentials',
     'client_id': client_id,
-    'client_secret': client_secret
+    'client_secret': client_secret,
+    'scope': 'user-library-read'
 }
 
 response = requests.post(auth_url, data=auth_data)
 
 if response.status_code == 200:
     response_data = response.json()
-    print('Response:', response_data)
     access_token = response_data['access_token']
     print('Access Token:', access_token)
 else:
@@ -97,6 +98,75 @@ if response.status_code == 200:
 else:
     print('Error:', response.status_code)
 
+##########
+#
+##########
 
+num_songs = 10  # Number of songs to include in the playlist
 
+# This is Lin's user id
+user_id = '31kehdawawjcaac7i2sfhkevuhsq'
+# Retrieve user's liked songs
+api_url = 'https://api.spotify.com/v1/me/tracks'
+headers = {
+    'Authorization': 'Bearer ' + access_token
+}
+params = {
+    'limit': 50  # We can adjust this later.
+}
+response = requests.get(api_url, headers=headers, params=params)
+liked_songs_data = response.json().get('items', [])
 
+# Randomly select songs
+if num_songs > len(liked_songs_data):
+    num_songs = len(liked_songs_data)
+
+selected_songs = random.sample(liked_songs_data, num_songs)
+
+# Create a new playlist
+playlist_name = 'My Liked Songs Playlist'
+playlist_description = 'A playlist with my liked songs'
+playlist_public = True
+
+create_playlist_url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+create_playlist_data = {
+    'name': playlist_name,
+    'description': playlist_description,
+    'public': playlist_public
+}
+
+create_playlist_response = requests.post(create_playlist_url, headers=headers, json=create_playlist_data)
+
+# Check the response status code
+if create_playlist_response.status_code == 201:
+    create_playlist_data = create_playlist_response.json()
+    playlist_id = create_playlist_data.get('id')
+
+    if playlist_id:
+        # Remove all existing tracks from the playlist
+        remove_tracks_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+        remove_tracks_response = requests.delete(remove_tracks_url, headers=headers)
+
+        if remove_tracks_response.status_code == 200:
+            # Get the URIs of selected songs
+            track_uris = [song['track']['uri'] for song in selected_songs]
+
+            # Add selected songs to the playlist
+            add_tracks_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+            add_tracks_data = {
+                'uris': track_uris
+            }
+
+            add_tracks_response = requests.post(add_tracks_url, headers=headers, json=add_tracks_data)
+
+            # Check the response status code
+            if add_tracks_response.status_code == 201:
+                print('Playlist created successfully and tracks added!')
+            else:
+                print('Error adding tracks to the playlist:', add_tracks_response.status_code)
+        else:
+            print('Error removing existing tracks from the playlist:', remove_tracks_response.status_code)
+    else:
+        print('Error creating playlist. Response:', create_playlist_data)
+else:
+    print('Error creating playlist:', create_playlist_response.status_code)
