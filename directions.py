@@ -24,7 +24,7 @@ def get_directions_duration(start, destination, mode, api_key):
     return None
 
 #api key
-api_key = 'AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M'
+api_key = ''
 
 #put in start and destination (city, state) format as of rn
 start = '575 Commonwealth Ave Boston, MA'
