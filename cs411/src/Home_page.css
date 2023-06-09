@@ -25,25 +25,25 @@
 .overlay-text {
   font-size: 4vw; 
   font-weight: bold;
-  margin-top: 10vh; 
-  margin-left: 8vw; 
+  margin-top: 11vh; 
+  margin-left: 10vw; 
 }
 
 .body-text {
-  font-size: 1vw; 
+  font-size: 1.2vw; 
   font-weight: regular;
   margin-top: 2vh; 
-  margin-left: 10vw;
+  margin-left: 12vw;
   font-style: italic;
   color: rgb(126, 195, 126);
 }
 
 .login-button {
-  width: 12vw; /* vw unit is responsive to the width of the viewport */
-  height: 12vw; /* making this the same as width keeps the button as a circle */
+  width: 12vw; 
+  height: 12vw; 
   background-color: rgb(126, 195, 126);
   color: white;
-  font-size: 1.5vw; /* adjust as necessary */
+  font-size: 1.5vw; 
   font-weight: bold;
   border: none;
   cursor: pointer;
@@ -53,7 +53,7 @@
   align-items: center;
   text-align: center;
   padding: 1vw; 
-  margin-left: 60vw; 
+  margin-left: 70vw; 
   margin-top: 6vh; 
 }
 
