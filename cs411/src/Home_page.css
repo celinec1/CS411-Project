@@ -1,73 +1,9 @@
-/* .home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  justify-content: center;
-  height: 100vh;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start; 
-  background: linear-gradient(to right, #1f1f20, #101010);
-  color: white;
-  z-index: 1;
-  padding: 2rem; 
-}
-
-.overlay-text {
-  font-size: 4rem;
-  font-weight: bold;
-  margin-top: 10rem;
-  margin-left: 8rem;
-}
-
-.body-text {
-  font-size: 1rem;
-  font-weight: regular;
-  margin-top: 2rem;
-  margin-left: 10rem;
-  font-style: italic;
-  color: rgb(126, 195, 126);
-}
-
-.login-button {
-  width: 200px;  
-  height: 200px;  
-  background-color: rgb(126, 195, 126);
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%; 
-  display: flex;  
-  justify-content: center;  
-  align-items: center; 
-  text-align: center; 
-  padding: 10px;  
-  margin-left: 60rem;
-  margin-top: 4rem;
-}
-
-
-.login-button:hover {
-  background-color: rgb(55, 111, 55);
-} */
-
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  height: 100vh; /* vh unit is responsive to the height of the viewport */
+  height: 100vh;
 }
 
 .overlay {
@@ -83,21 +19,21 @@
   background: linear-gradient(to right, #1f1f20, #101010);
   color: white;
   z-index: 1;
-  padding: 2vw; /* vw unit is responsive to the width of the viewport */
+  padding: 2vw; 
 }
 
 .overlay-text {
-  font-size: 4vw; /* adjust as necessary */
+  font-size: 4vw; 
   font-weight: bold;
-  margin-top: 10vh; /* vh unit is responsive to the height of the viewport */
-  margin-left: 8vw; /* vw unit is responsive to the width of the viewport */
+  margin-top: 10vh; 
+  margin-left: 8vw; 
 }
 
 .body-text {
-  font-size: 1vw; /* adjust as necessary */
+  font-size: 1vw; 
   font-weight: regular;
-  margin-top: 2vh; /* vh unit is responsive to the height of the viewport */
-  margin-left: 10vw; /* vw unit is responsive to the width of the viewport */
+  margin-top: 2vh; 
+  margin-left: 10vw;
   font-style: italic;
   color: rgb(126, 195, 126);
 }
@@ -116,9 +52,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 1vw; /* vw unit is responsive to the width of the viewport */
-  margin-left: 60vw; /* vw unit is responsive to the width of the viewport */
-  margin-top: 6vh; /* vh unit is responsive to the height of the viewport */
+  padding: 1vw; 
+  margin-left: 60vw; 
+  margin-top: 6vh; 
 }
 
 .login-button:hover {
