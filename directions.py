@@ -5,11 +5,11 @@ api_key = 'AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M'
 start = '808 Commonwealth Ave Boston, MA'
 destination = '528 Beacon St Boston, MA'
 
+#returns dictionary where key is mode and value is a tuple (time in text, time in seconds)
 def get_directions_duration(start, destination, mode, api_key):
     if (validate_address(start, api_key) != (None,None)) and (validate_address(destination, api_key) != (None, None)):
         url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start}&destination={destination}&mode={mode}&key={api_key}"
         response = requests.get(url)
-        
         if response.status_code == 200:
             data = response.json()
             
@@ -17,9 +17,10 @@ def get_directions_duration(start, destination, mode, api_key):
                 durations = {}
                 for route in data["routes"]:
                     for leg in route["legs"]:
-                        mode = leg["steps"][0]["travel_mode"]
-                        duration = leg["duration"]["text"]
+                        #mode = leg["steps"][0]["travel_mode"]
+                        duration = (leg["duration"]["text"], leg['duration']['value']) #tuple of text and seconds
                         durations[mode] = duration
+                        #print(duration)
                 
                 return durations
             else:
@@ -54,14 +55,22 @@ def validate_address(address, api_key): #returns tuple of formatted address and 
 
     return None, None
 
+#returns dictionary of all modes where the value is tuple (time in text, time in seconds)
 def route_durations(start, destination, api_key):
+    all_durations = {}
     modes = ['driving', 'bicycling', 'transit', 'walking']
     for mode in modes:
         directions_durations = get_directions_duration(start, destination, mode, api_key)
         if directions_durations:
+            #print(directions_durations)
             for modes, duration in directions_durations.items(): #this displays "transit" as "walking" not sure why
                 if mode != None:
-                    print(f"{mode.capitalize()}: {duration}") #prints mode from the list and not the dictionary
-
+                    all_durations[mode] = duration
+                    print(f"{mode.capitalize()}: {duration[0]}") #prints mode from the list and not the dictionary
+    
+    return(all_durations)
 
 print(route_durations(start, destination, api_key))
+#print(get_directions_duration(start, destination, 'transit', api_key))
+
+
