@@ -1,0 +1,7 @@
+user generated Spotify playlist
+
+As a user, once I confirm my mode of transportation to my destination, I will receive a Spotify playlist. 
+However, in addition to having a link that redirects me to Spotify, I would like to view the list of songs 
+included in the generated playlist. This will allow me the option to add the songs to a playlist that I have 
+already created. Furthermore, I would like to have a sneak peek of the recommended songs before clicking on 
+the Spotify playlist link.
