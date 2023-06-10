@@ -1,0 +1,6 @@
+user restarting and inputting a new destination 
+
+As a user, when I want to input a new destination, I don't want to log out and log back in to restart the process. 
+Instead, I would like a button that allows me to return home and prompts me to enter the starting location and destination 
+again, so that I can use the application seamlessly. This functionality should be available after I receive the Spotify
+playlists and lists of recommended songs.
