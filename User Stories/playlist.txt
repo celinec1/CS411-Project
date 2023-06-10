@@ -1,3 +1,7 @@
 user generated Spotify playlist
 
-As a user, once I confirm my mode of transportation to my destination, I will receive a Spotify playlist. However, besides having a link that redirects me to Spotify, I would like the ability to view the list of songs included in the generated playlist. This way, I can choose to add the songs to an existing playlist of mine. Additionally, I would appreciate a sneak peek of the recommended songs before clicking on the Spotify playlist link. In case I don't have Spotify, I would like the option to see the generated playlist so that I can manually input these songs into an Apple Music playlist.
+As a user, once I confirm my mode of transportation to my destination, I will receive a Spotify playlist. However, besides having a link that
+redirects me to Spotify, I would like the ability to view the list of songs included in the generated playlist. This way, I can choose to add 
+the songs to an existing playlist of mine. Additionally, I would appreciate a sneak peek of the recommended songs before clicking on the 
+Spotify playlist link. In case I don't have Spotify, I would like the option to see the generated playlist so that I can manually input these 
+songs into an Apple Music playlist.
