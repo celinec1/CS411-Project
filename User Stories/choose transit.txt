@@ -1,0 +1,7 @@
+user choosing the mode of transportation to the desination 
+
+As a user, the application suggests the best mode of transportation based on weather and time. However, I want to make the final choice. 
+Once I've made my choice, the application should generate a playlist according to my selection rather than what is recommended. 
+Additionally, the application should provide the estimated time for each mode of transportation, the weather forecast, and the 
+recommended transportation. With this information, I can decide how I will reach my destination.
+

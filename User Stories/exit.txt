@@ -1,0 +1,5 @@
+user changing destination in the middle of running the program
+
+As a user, I have the flexibility to change my destination while inputting a new one. To exit the program without generating an 
+entirely new response, I can simply return to the home page where I can input the current location and new destination. During 
+this process, I should be prompted to confirm if I want to exit the current process, ensuring that it's what I intended to do.

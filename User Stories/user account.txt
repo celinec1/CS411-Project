@@ -1,0 +1,6 @@
+User account
+
+As a user, I want to be able to make an account and see my past destinations. After logging in, I will see my 
+profile and in my profile there will be a history of the spotify playlists links that was generated so I can 
+listen to them again. Also, I can press on a past destination to find the best route for the same destination I 
+had in the past, since the best route may have changed based on my new current location and weather. 

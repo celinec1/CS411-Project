@@ -1,0 +1,11 @@
+user log in
+
+    As a user, when I visit the website I will be prompted to log in user my Spotfy account. Clicking on the log-in
+    button will redirect me to the Spotify authentication page, where I can log in with my Spotify credentials. If I
+    am already logged into Spotify on my device, the info may autofill. Once my Spotify authentication is completed
+    I will be brought back to the site. 
+
+    If there are any issues with logging in, such as authorization issues or incorrect credentials, proper error
+    messages and prompts will be displayed.
+
+    

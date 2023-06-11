@@ -1,0 +1,4 @@
+user log out 
+
+As a user, I want to be able to log out if I am not on a personal device or someone wants to also try this application. 
+There should be a log out button, and my information and profile should be saved when I log back in again. 

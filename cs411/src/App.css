@@ -13,19 +13,18 @@
   }
 } */
 
-.App-header {
-  background: linear-gradient(to right, #1f1f20, #101010); /* Replace the color values with your desired gradient */
-  min-height: 100vh;
+/* .App-header {
+  background: linear-gradient(to right, #1f1f20, #101010); 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  font-weight: bold; /* Make the font bold */
-  text-transform: uppercase; /* Apply uppercase text */
+  font-weight: bold; 
+  text-transform: uppercase; 
   letter-spacing: 2px; 
-}
+} */
 
 
 /* .App-link {
