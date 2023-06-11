@@ -58,27 +58,69 @@ def create_random_playlist(user_id, access_token, num_songs):
             # Step 3: Add the random songs to the playlist
             add_tracks_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
             tracks_data = [{'uri': f'spotify:track:{song_id}'} for song_id in random_song_ids]
-            print('Tracks Data:', json.dumps(tracks_data, indent=2))  # Print tracks_data JSON payload
-            response = requests.post(add_tracks_url, headers=headers, json=tracks_data)
+            response = requests.post(add_tracks_url, headers=headers, json={'uris': [track['uri'] for track in tracks_data]})
             
             if response.status_code == 201:
                 print('Playlist created successfully with random songs!')
-
-                # Step 4: Print playlist information
-                playlist_info_url = f'https://api.spotify.com/v1/playlists/{playlist_id}'
-                response = requests.get(playlist_info_url, headers=headers)
-                
-                if response.status_code == 200:
-                    playlist_info = response.json()
-                    print('Playlist Information:', playlist_info)
-                else:
-                    print('Error retrieving playlist information:', response.text)
             else:
                 print('Error adding tracks to playlist:', response.text)
         else:
             print('Error retrieving random songs:', response.text)
     else:
         print('Error creating playlist:', response.text)
+
+
+# def create_random_playlist(user_id, access_token, num_songs):
+#     # Step 1: Create a new playlist
+#     playlist_url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+#     headers = {
+#         'Authorization': f'Bearer {access_token}',
+#         'Content-Type': 'application/json',
+#     }
+#     playlist_data = {
+#         'name': 'Random Playlist',
+#         'public': False,
+#     }
+#     response = requests.post(playlist_url, headers=headers, json=playlist_data)
+    
+#     if response.status_code == 201:
+#         playlist_data = response.json()
+#         playlist_id = playlist_data['id']
+#         print('Playlist ID:', playlist_id)
+
+#         # Step 2: Get a list of random song IDs
+#         random_songs_url = 'https://api.spotify.com/v1/browse/new-releases'
+#         response = requests.get(random_songs_url, headers=headers)
+        
+#         if response.status_code == 200:
+#             songs_data = response.json()
+#             song_ids = [song['id'] for song in songs_data['albums']['items']]
+#             random_song_ids = random.sample(song_ids, num_songs)
+
+#             # Step 3: Add the random songs to the playlist
+#             add_tracks_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+#             tracks_data = [{'uri': f'spotify:track:{song_id}'} for song_id in random_song_ids]
+#             print('Tracks Data:', json.dumps(tracks_data, indent=2))  # Print tracks_data JSON payload
+#             response = requests.post(add_tracks_url, headers=headers, json=tracks_data)
+            
+#             if response.status_code == 201:
+#                 print('Playlist created successfully with random songs!')
+
+#                 # Step 4: Print playlist information
+#                 playlist_info_url = f'https://api.spotify.com/v1/playlists/{playlist_id}'
+#                 response = requests.get(playlist_info_url, headers=headers)
+                
+#                 if response.status_code == 200:
+#                     playlist_info = response.json()
+#                     print('Playlist Information:', playlist_info)
+#                 else:
+#                     print('Error retrieving playlist information:', response.text)
+#             else:
+#                 print('Error adding tracks to playlist:', response.text)
+#         else:
+#             print('Error retrieving random songs:', response.text)
+#     else:
+#         print('Error creating playlist:', response.text)
 
 
 # Rest of the code remains the same...
