@@ -6,7 +6,7 @@ const Home_page = () => {
   const history = useHistory();
 
   const handleLoginClick = () => {
-    history.push('/login'); // replace '/login' with the path to your login page
+    history.push('/login'); // this will navigate to the login page defined in your Router
   }
 
   return (

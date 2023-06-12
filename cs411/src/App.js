@@ -22,17 +22,33 @@
 //   );
 // }
 
-import React from 'react';
-import "./App.css";
-import Home_page from './Home_page';
+// import React from 'react';
+// import "./App.css";
+// import Home_page from './Home_page';
 
-function App() {
+// function App() {
+//   return (
+//     <div className="App">
+//       <Home_page />
+//       <header className="App-header"> </header>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import HomePage from './Home_page';
+import LoginPage from './login'; // import the login component
+
+const App = () => {
   return (
-    <div className="App">
-      <Home_page />
-      <header className="App-header"> </header>
-    </div>
+    <Router>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/login" component={LoginPage} />  // set the path to your login component
+    </Router>
   );
-}
+};
 
 export default App;
