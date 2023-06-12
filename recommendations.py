@@ -17,7 +17,14 @@ def main(start, destination): #returns recommended mode of transportation
             if temp > 80:
                 return 'driving'
             else:
-                return 'walking'
+                if durations['walking'][1] >  1200:
+                    fastest = min(durations['bicycling'][1], durations['transit'][1])
+                    if durations['bicycling'][1] == fastest:
+                        return 'bicycling'
+                    else:
+                        return 'transit'
+                else:
+                    return 'walking'
         else:
             return shortest_time(durations)
     return None
