@@ -27,8 +27,9 @@ def index():
     auth_redirect_url = auth_url + '?' + '&'.join([f'{k}={v}' for k, v in auth_params.items()])
     return redirect(auth_redirect_url)
 
-def create_top_tracks_playlist(user_id, access_token, num_songs):
-    # Step 1: Create a new playlist
+
+def create_top_tracks_playlist(user_id, access_token, num_songs, length):
+    # create a new playlist
     playlist_url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -45,7 +46,7 @@ def create_top_tracks_playlist(user_id, access_token, num_songs):
         playlist_id = playlist_data['id']
         print('Playlist ID:', playlist_id)
 
-        # Step 2: Get the user's top tracks
+        # get the user's top tracks
         top_tracks_url = 'https://api.spotify.com/v1/me/top/tracks'
         params = {
             'limit': 200,
@@ -57,9 +58,27 @@ def create_top_tracks_playlist(user_id, access_token, num_songs):
             track_ids = [track['id'] for track in tracks_data['items']]
             random_track_ids = random.sample(track_ids, num_songs)
 
-            # Step 3: Add the top tracks to the playlist
+            # add the top tracks to the playlist
             add_tracks_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
-            tracks_data = [{'uri': f'spotify:track:{track_id}'} for track_id in random_track_ids]
+            tracks_data = []
+            for track_id in random_track_ids:
+                track_info_url = f'https://api.spotify.com/v1/tracks/{track_id}'
+                response = requests.get(track_info_url, headers=headers)
+                if response.status_code == 200:
+                    track_info = response.json()
+                    tracks_data.append({'uri': f'spotify:track:{track_id}', 'duration_ms': track_info['duration_ms']})
+
+            # calculate total duration of tracks
+            total_duration = sum(track['duration_ms'] for track in tracks_data)
+            
+            # sort tracks by duration
+            tracks_data.sort(key=lambda x: x['duration_ms'])
+            
+            # remove tracks to get closest duration to the desired length
+            while total_duration > length * 1000:
+                removed_track = tracks_data.pop()
+                total_duration -= removed_track['duration_ms']
+
             response = requests.post(add_tracks_url, headers=headers, json={'uris': [track['uri'] for track in tracks_data]})
 
             if response.status_code == 201:
@@ -70,6 +89,7 @@ def create_top_tracks_playlist(user_id, access_token, num_songs):
             print('Error retrieving top tracks:', response.text)
     else:
         print('Error creating playlist:', response.text)
+
 
 # Step 2: Obtain authorization code - Handle redirect URI and retrieve the code
 @app.route('/callback')
@@ -119,7 +139,7 @@ def callback():
                 print('Display Name:', display_name)
                 print('Email:', email)
                 # Add any additional processing or rendering logic as needed
-                create_top_tracks_playlist(user_id, access_token, num_songs)
+                create_top_tracks_playlist(user_id, access_token, num_songs, 1200)
                 return render_template('success.html', display_name=display_name, email=email)
             else:
                 error_message = profile_data.get('error', {}).get('message')
