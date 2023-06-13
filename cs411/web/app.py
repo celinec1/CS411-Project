@@ -71,11 +71,8 @@ def create_top_tracks_playlist(user_id, access_token, num_songs, length):
             # calculate total duration of tracks
             total_duration = sum(track['duration_ms'] for track in tracks_data)
             
-            # sort tracks by duration
-            tracks_data.sort(key=lambda x: x['duration_ms'])
-            
             # remove tracks to get closest duration to the desired length
-            while total_duration > length * 1000:
+            while total_duration >= length * 1000:
                 removed_track = tracks_data.pop()
                 total_duration -= removed_track['duration_ms']
 
@@ -139,7 +136,7 @@ def callback():
                 print('Display Name:', display_name)
                 print('Email:', email)
                 # Add any additional processing or rendering logic as needed
-                create_top_tracks_playlist(user_id, access_token, num_songs, 1200)
+                create_top_tracks_playlist(user_id, access_token, num_songs, 20000)
                 return render_template('success.html', display_name=display_name, email=email)
             else:
                 error_message = profile_data.get('error', {}).get('message')
