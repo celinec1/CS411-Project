@@ -1,13 +1,17 @@
 import json
 import random
 from flask import Flask, render_template, request, redirect, url_for
+from flask_cors import CORS
 import requests
+
+# Enable CORS
 
 import requests
 from urllib.parse import quote
 from flask import Flask, render_template, redirect, request
 
 app = Flask(__name__)
+CORS(app)
 user = ''
 access = ''
 
@@ -28,6 +32,7 @@ def index():
     return redirect(auth_redirect_url)
 
 
+'''
 def create_top_tracks_playlist(user_id, access_token, num_songs, length):
     # create a new playlist
     playlist_url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
@@ -75,6 +80,69 @@ def create_top_tracks_playlist(user_id, access_token, num_songs, length):
             while total_duration >= length * 1000:
                 removed_track = tracks_data.pop()
                 total_duration -= removed_track['duration_ms']
+
+            response = requests.post(add_tracks_url, headers=headers, json={'uris': [track['uri'] for track in tracks_data]})
+
+            if response.status_code == 201:
+                print('Playlist created successfully with top tracks!')
+                link = f'https://open.spotify.com/playlist/{playlist_id}'
+                print(link)
+                return link
+            else:
+                print('Error adding tracks to playlist:', response.text)
+        else:
+            print('Error retrieving top tracks:', response.text)
+    else:
+        print('Error creating playlist:', response.text)
+'''
+
+def create_top_tracks_playlist(user_id, access_token, length):
+    # Create a new playlist
+    playlist_url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json',
+    }
+    playlist_data = {
+        'name': 'Have a safe trip!',
+        'public': False,
+    }
+    response = requests.post(playlist_url, headers=headers, json=playlist_data)
+
+    if response.status_code == 201:
+        playlist_data = response.json()
+        playlist_id = playlist_data['id']
+        print('Playlist ID:', playlist_id)
+
+        # Get the user's top tracks
+        top_tracks_url = 'https://api.spotify.com/v1/me/top/tracks'
+        params = {
+            'limit': 200,
+        }
+        response = requests.get(top_tracks_url, headers=headers, params=params)
+
+        if response.status_code == 200:
+            tracks_data = response.json()
+            track_ids = [track['id'] for track in tracks_data['items']]
+            random.shuffle(track_ids)
+
+            # Add the top tracks to the playlist
+            add_tracks_url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+            tracks_data = []
+            total_duration = 0
+
+            for track_id in track_ids:
+                track_info_url = f'https://api.spotify.com/v1/tracks/{track_id}'
+                response = requests.get(track_info_url, headers=headers)
+
+                if response.status_code == 200:
+                    track_info = response.json()
+                    duration_ms = track_info['duration_ms']
+                    if total_duration + duration_ms <= length * 1000:
+                        tracks_data.append({'uri': f'spotify:track:{track_id}', 'duration_ms': duration_ms})
+                        total_duration += duration_ms
+                    else:
+                        break
 
             response = requests.post(add_tracks_url, headers=headers, json={'uris': [track['uri'] for track in tracks_data]})
 
@@ -139,7 +207,7 @@ def callback():
                 print('Display Name:', display_name)
                 print('Email:', email)
                 # Add any additional processing or rendering logic as needed
-                create_top_tracks_playlist(user_id, access_token, num_songs, 20000)
+                create_top_tracks_playlist(user_id, access_token, 20000)
 
                 return render_template('success.html', display_name=display_name, email=email)
             else:
