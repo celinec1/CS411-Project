@@ -80,7 +80,9 @@ def create_top_tracks_playlist(user_id, access_token, num_songs, length):
 
             if response.status_code == 201:
                 print('Playlist created successfully with top tracks!')
-                return (f'https://open.spotify.com/playlist/{playlist_id}')
+                link = f'https://open.spotify.com/playlist/{playlist_id}'
+                print(link)
+                return link
             else:
                 print('Error adding tracks to playlist:', response.text)
         else:
