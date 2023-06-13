@@ -80,6 +80,7 @@ def create_top_tracks_playlist(user_id, access_token, num_songs, length):
 
             if response.status_code == 201:
                 print('Playlist created successfully with top tracks!')
+                return (f'https://open.spotify.com/playlist/{playlist_id}')s
             else:
                 print('Error adding tracks to playlist:', response.text)
         else:
@@ -137,6 +138,7 @@ def callback():
                 print('Email:', email)
                 # Add any additional processing or rendering logic as needed
                 create_top_tracks_playlist(user_id, access_token, num_songs, 20000)
+
                 return render_template('success.html', display_name=display_name, email=email)
             else:
                 error_message = profile_data.get('error', {}).get('message')
