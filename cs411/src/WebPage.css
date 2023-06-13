@@ -1,0 +1,269 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 1.5vw;
+}
+
+.navbar h1 {
+  margin: 0;
+}
+
+.navbar button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw; 
+    font-size: 16px; 
+}
+  
+ .navbar button:hover {
+    background-color: rgb(55, 111, 55);
+  }
+  
+
+.user-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  .user-input h2 {
+    margin-bottom: 20px;
+  }
+  
+  .user-input form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-input input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .user-input button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw; 
+    font-size: 16px; 
+  }
+  
+  .user-input button:hover {
+    background-color: rgb(55, 111, 55);
+  }
+   */
+
+   body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 1.5vw;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+  }
+  
+  .navbar button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+  }
+  
+  .navbar button:hover {
+    background-color: rgb(55, 111, 55);
+  }
+  
+  .user-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  .user-input h2 {
+    margin-bottom: 20px;
+  }
+  
+  .user-input form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-input input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .user-input button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+  }
+  
+  .user-input button:hover {
+    background-color: rgb(55, 111, 55);
+  }
+  
+  /* for the selecting transportation */
+  .transportation-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  .transportation-selection .transportation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .transportation-buttons button {
+    width: 8vw;
+    height: 8vw;
+    background-color: rgb(235, 193, 249);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1.5vw;
+    margin-bottom: 3vw;
+    margin-right: 5vw;
+    font-size: 16px;
+    align-items: center;
+  }
+  
+  .transportation-selection h2 {
+    margin-bottom: 20px;
+  }
+  
+  .transportation-buttons button.selected {
+    background-color: rgb(189, 138, 214);
+  }
+
+  /* .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .button-group .previous-button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+    margin-bottom: 10vw;
+    margin-right: 5vw;
+    margin-top: 5vw;
+  }
+  
+  .button-group .submit-button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw; 
+    font-size: 16px;
+    margin-top: 1vw;
+  }
+   */
+
+   /* .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3vw;
+  }
+  
+  .button-group .submit-button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+  }
+  
+  .button-group .previous-button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+  }
+  
+   */
+  
+
+   .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3vw;
+  }
+  
+  .button-group .submit-button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+    margin-top: 2vw;
+  }
+  
+  .button-group .previous-button {
+    background-color: rgb(126, 195, 126);
+    color: rgb(1, 1, 1);
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding: 1vw 1.5vw;
+    font-size: 16px;
+    margin-top: 2vw;
+  }
