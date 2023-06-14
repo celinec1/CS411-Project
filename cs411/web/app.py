@@ -10,6 +10,25 @@ app = Flask(__name__)
 user = ''
 access = ''
 
+#working on taking in inputs 
+@app.route('/api/submit', methods=['POST'])
+def submit():
+    data = request.get_json()
+    location = data.get('location')
+    destination = data.get('destination')
+
+    # Process the location and destination data as needed
+    # Example: Print the received data
+    print('Location:', location)
+    print('Destination:', destination)
+
+    # Perform any additional actions with the received data
+
+    
+    return jsonify({'message': 'Data received successfully'})
+
+
+
 # Step 1: Authorization - Redirect user to Spotify's authorization page
 @app.route('/')
 def index():
@@ -82,6 +101,9 @@ def create_top_tracks_playlist(user_id, access_token, num_songs, length):
 
             if response.status_code == 201:
                 print('Playlist created successfully with top tracks!')
+                link = f'https://open.spotify.com/playlist/{playlist_id}'
+                print(link)
+                return jsonify({link})
             else:
                 print('Error adding tracks to playlist:', response.text)
         else:
@@ -153,7 +175,7 @@ def callback():
                 error_message = profile_data.get('error', {}).get('message')
                 return jsonify({'error': error_message})          
             
-    return jsonify({'error': 'Acces token not obtained.'})
+    return jsonify({'error': 'Access token not obtained.'})
 
 
 
