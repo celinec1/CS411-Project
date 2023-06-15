@@ -5,6 +5,11 @@ from flask_cors import CORS
 import requests
 from urllib.parse import quote
 
+import sys
+sys.path.append('../../../CS411-Project')
+
+import directions
+
 
 app = Flask(__name__)
 user = ''
@@ -22,10 +27,12 @@ def submit():
     print('Location:', location)
     print('Destination:', destination)
 
+    durations = directions.route_durations(location, destination, directions.api_key)
+    #durations = list[durations]
     # Perform any additional actions with the received data
 
     
-    return jsonify({'message': 'Data received successfully'})
+    return jsonify(durations)
 
 
 
@@ -103,7 +110,7 @@ def create_top_tracks_playlist(user_id, access_token, num_songs, length):
                 print('Playlist created successfully with top tracks!')
                 link = f'https://open.spotify.com/playlist/{playlist_id}'
                 print(link)
-                return jsonify({link})
+                return jsonify(link)
             else:
                 print('Error adding tracks to playlist:', response.text)
         else:
