@@ -34,10 +34,11 @@ def submit():
     
     return jsonify(durations)
 
+@app.route('/api/transportation', methods=['POST'])
 def handle_transportation_selection():
     transportation = request.json.get('transportation')
     # Process the selected transportation and perform any necessary operations
-    
+    print (transportation)
     # Create a response to send back to the frontend
     response = {'message': 'Transportation selection received', 'transportation': transportation}
     
