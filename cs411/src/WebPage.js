@@ -6,7 +6,7 @@ const WebPage = () => {
   const [selectedTransportation, setSelectedTransportation] = useState('');
   const [isTransportationSubmitted, setIsTransportationSubmitted] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const location = event.target.locationInput.value;
     const destination = event.target.destinationInput.value;
@@ -16,6 +16,28 @@ const WebPage = () => {
 
     event.target.reset();
     setIsFormSubmitted(true);
+
+    // Send the POST request to the backend
+    try {
+      const response = await fetch('http://localhost:8000/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ location, destination }),
+      });
+
+      if (response.ok) {
+        console.log('Data sent to backend successfully');
+        // Optionally, you can do something with the response from the backend
+        const data = await response.json();
+        console.log('Response from backend:', data);
+      } else {
+        console.log('Failed to send data to backend');
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
   };
 
   const handleTransportationSelect = (transportation) => {
@@ -29,8 +51,26 @@ const WebPage = () => {
     setIsTransportationSubmitted(false);
   };
 
-  const handleTransportationSubmit = () => {
-    setIsTransportationSubmitted(true);
+  const handleTransportationSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/transportation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ transportation: selectedTransportation }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Response from backend:', data);
+        setIsTransportationSubmitted(true);
+      } else {
+        console.log('Failed to fetch response from backend');
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
   };
 
   return (
@@ -54,28 +94,28 @@ const WebPage = () => {
           <h2>Select mode of transportation:</h2>
           <div className="transportation-buttons">
             <button
-              className={`transportation-button ${selectedTransportation === 'walk' ? 'selected' : ''}`}
-              onClick={() => handleTransportationSelect('walk')}
+              className={`transportation-button ${selectedTransportation === 'driving' ? 'selected' : ''}`}
+              onClick={() => handleTransportationSelect('driving')}
             >
-              Walk
+              Driving
             </button>
             <button
-              className={`transportation-button ${selectedTransportation === 'cycle' ? 'selected' : ''}`}
-              onClick={() => handleTransportationSelect('cycle')}
+              className={`transportation-button ${selectedTransportation === 'bicycling' ? 'selected' : ''}`}
+              onClick={() => handleTransportationSelect('bicycling')}
             >
-              Cycle
+              Bicycling
             </button>
             <button
-              className={`transportation-button ${selectedTransportation === 'car' ? 'selected' : ''}`}
-              onClick={() => handleTransportationSelect('car')}
+              className={`transportation-button ${selectedTransportation === 'transit' ? 'selected' : ''}`}
+              onClick={() => handleTransportationSelect('transit')}
             >
-              Car
+              Transit
             </button>
             <button
-              className={`transportation-button ${selectedTransportation === 'train' ? 'selected' : ''}`}
-              onClick={() => handleTransportationSelect('train')}
+              className={`transportation-button ${selectedTransportation === 'walking' ? 'selected' : ''}`}
+              onClick={() => handleTransportationSelect('walking')}
             >
-              Train
+              Walking
             </button>
           </div>
           <div className="button-group">
