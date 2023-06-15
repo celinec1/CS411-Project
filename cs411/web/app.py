@@ -12,6 +12,7 @@ import directions
 
 
 app = Flask(__name__)
+CORS(app)
 user = ''
 access = ''
 
@@ -30,9 +31,17 @@ def submit():
     durations = directions.route_durations(location, destination, directions.api_key)
     #durations = list[durations]
     # Perform any additional actions with the received data
-
     
     return jsonify(durations)
+
+def handle_transportation_selection():
+    transportation = request.json.get('transportation')
+    # Process the selected transportation and perform any necessary operations
+    
+    # Create a response to send back to the frontend
+    response = {'message': 'Transportation selection received', 'transportation': transportation}
+    
+    return jsonify(response)
 
 
 
