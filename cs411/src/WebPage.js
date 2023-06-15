@@ -5,7 +5,8 @@ const WebPage = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [selectedTransportation, setSelectedTransportation] = useState('');
   const [isTransportationSubmitted, setIsTransportationSubmitted] = useState(false);
-
+  const [backendResponse, setBackendResponse] = useState(null);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const location = event.target.locationInput.value;
@@ -65,6 +66,8 @@ const WebPage = () => {
         const data = await response.json();
         console.log('Response from backend:', data);
         setIsTransportationSubmitted(true);
+        setBackendResponse(data); // Store the backend response in a state variable
+        console.log('backendResponse:', backendResponse); //make sure the variable is being set
       } else {
         console.log('Failed to fetch response from backend');
       }
@@ -129,6 +132,9 @@ const WebPage = () => {
           {isTransportationSubmitted && (
             <div className="playlist-section">
               <h2>Here is the Spotify playlist!</h2>
+              {backendResponse && (
+              <p>{backendResponse.message}</p>
+              )}  
             </div>
           )}
         </div>
