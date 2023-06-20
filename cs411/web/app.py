@@ -1,4 +1,3 @@
-
 import random
 from flask import Flask, request, redirect, jsonify
 from flask_cors import CORS
