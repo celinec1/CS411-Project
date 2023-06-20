@@ -30,7 +30,7 @@ def submit():
     durations = directions.route_durations(location, destination, directions.api_key)
     #durations = list[durations]
     
-    return jsonify(durations)
+    return jsonify({'durations' : durations})
 
 @app.route('/api/transportation', methods=['POST'])
 def handle_transportation_selection():
