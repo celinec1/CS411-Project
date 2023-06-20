@@ -8,7 +8,7 @@ from urllib.parse import quote
 import sys
 sys.path.append('../../../CS411-Project')
 
-import directions
+import directions, weather, recommendations
 # from pymongo import MongoClient
 
 # client = MongoClient('mongodb://localhost:27017/')
@@ -37,7 +37,13 @@ def submit():
     # data = {'Location': location, 'Destination': destination}
     # collection.insert_one(data)
 
-    return jsonify({'durations' : durations})
+    recommended = recommendations.main(location, destination)
+    forecast = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
+
+
+    response = {'durations' : durations, 'recommended': recommended, 'forecast': forecast}
+    print(response)
+    return jsonify(response)
 
 @app.route('/api/transportation', methods=['POST'])
 def handle_transportation_selection():

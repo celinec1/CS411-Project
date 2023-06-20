@@ -7,6 +7,9 @@ const WebPage = () => {
   const [isTransportationSubmitted, setIsTransportationSubmitted] = useState(false);
   const [backendResponse, setBackendResponse] = useState(null);
   const [durations, setDurations] = useState(null);
+  const [recommended, setRecommended] = useState(null);
+  const [weather, setWeather] = useState(null);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,6 +34,8 @@ const WebPage = () => {
         const data = await response.json();
         console.log('Response from backend:', data);
         setDurations(data.durations);  // Store the durations
+        setRecommended(data.recommended);
+        setWeather(data.forecast);
       } else {
         console.log('Failed to send data to backend');
       }
@@ -73,6 +78,7 @@ const WebPage = () => {
       console.log('Error:', error);
     }
   };
+
 
   if (!isFormSubmitted) {
     return (
