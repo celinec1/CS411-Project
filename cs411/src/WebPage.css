@@ -147,6 +147,14 @@
   margin-top: 2vw;
 }
 
+.button-group .previous-button:hover {
+  background-color: rgb(55, 111, 55);
+}
+
+.button-group .submit-button:hover {
+  background-color: rgb(55, 111, 55);
+}
+
 .playlist-section h2{
       margin-bottom: 20px;
 }
