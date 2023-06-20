@@ -9,7 +9,11 @@ import sys
 sys.path.append('../../../CS411-Project')
 
 import directions
+from pymongo import MongoClient
 
+client = MongoClient('mongodb://localhost:27017/')
+db = client['CommuteBeatData']
+collection = db['CommuteBeatData.SpotifyUserData']
 
 app = Flask(__name__)
 CORS(app)
@@ -30,6 +34,9 @@ def submit():
     durations = directions.route_durations(location, destination, directions.api_key)
     #durations = list[durations]
     
+    data = {'Location': location, 'Destination': destination}
+    collection.insert_one(data)
+
     return jsonify({'durations' : durations})
 
 @app.route('/api/transportation', methods=['POST'])
@@ -121,6 +128,10 @@ def create_top_tracks_playlist(user_id, access_token, length):
                 print('Playlist created successfully with top tracks!')
                 link = f'https://open.spotify.com/playlist/{playlist_id}'
                 print(link)
+
+                data = {'Playlist': link}
+                collection.insert_one(data)
+
                 return link
             else:
                 print('Error adding tracks to playlist:', response.text)
@@ -174,6 +185,9 @@ def callback():
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
+                data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
+                collection.insert_one(data)
+
                 # Print the user ID and other information
                 print('User ID:', user_id)
                 print('Display Name:', display_name)
@@ -197,6 +211,7 @@ def callback():
 
     return jsonify({'error': 'Access token not obtained.'})
 
+client.close()
 
 # access_token = access
 num_songs = 20  # Number of random songs in the playlist
