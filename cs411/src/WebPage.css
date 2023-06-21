@@ -156,5 +156,21 @@
 }
 
 .playlist-section h2{
+  margin-top: 4vw;
       margin-bottom: 20px;
+}
+
+.playlist-section button {
+  background-color: rgb(126, 195, 126);
+  color: rgb(1, 1, 1);
+  border: none;
+  cursor: pointer;
+  border-radius: 1vw;
+  padding: 1vw 1.5vw;
+  font-size: 16px;
+  margin-top: 9vw;
+}
+
+.playlist-section button:hover {
+  background-color: rgb(55, 111, 55);
 }

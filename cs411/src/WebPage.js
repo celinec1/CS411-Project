@@ -9,7 +9,13 @@ const WebPage = () => {
   const [durations, setDurations] = useState(null);
   const [recommended, setRecommended] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [isRestarted, setIsRestarted] = useState(false);
 
+  const handleRestart = () => {
+    setIsFormSubmitted(false);
+    setIsTransportationSubmitted(false);
+    setIsRestarted(true);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,6 +25,7 @@ const WebPage = () => {
     console.log('Destination:', destination);
     event.target.reset();
     setIsFormSubmitted(true);
+    
 
     try {
       const response = await fetch('http://localhost:8000/api/submit', {
@@ -175,6 +182,9 @@ const WebPage = () => {
         <div className="playlist-section">
           <h2>Here is the Spotify playlist!</h2>
           {backendResponse && <p>{backendResponse.message}</p>}
+          <button className="restart-button" onClick={handleRestart}>
+        Restart
+      </button>
         </div>
       </div>
     );
