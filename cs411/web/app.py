@@ -8,6 +8,18 @@ from urllib.parse import quote
 import os
 import sys
 
+from pymongo import MongoClient
+
+connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
+# Create a MongoClient to interact with MongoDB Atlas
+client = MongoClient(connection_string)
+
+# Select your database
+db = client['Testing'] # Replace 'YourDatabaseName' with your database name
+
+# Select the collection within the database
+collection = db['test'] # Replace 'YourCollectionName' with your collection name
+
 # Get the grandparent directory of the current file (app.py)
 grandparent_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -16,10 +28,6 @@ sys.path.append(grandparent_directory)
 
 import directions, weather, recommendations
 from pymongo import MongoClient
-
-# client = MongoClient('mongodb://localhost:27017/')
-# db = client['CommuteBeatData']
-# collection = db['CommuteBeatData.SpotifyUserData']
 
 app = Flask(__name__)
 CORS(app)
@@ -197,8 +205,8 @@ def callback():
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
-                # data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
-                # collection.insert_one(data)
+                data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
+                collection.insert_one(data)
 
 
                 # Print the user ID and other information
