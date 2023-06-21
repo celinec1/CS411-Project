@@ -7,6 +7,8 @@ destination = '528 Beacon St Boston, MA'
 
 #returns dictionary where key is mode and value is a tuple (time in text, time in seconds)
 def get_directions_duration(start, destination, mode, api_key):
+    #global location
+    #location = start
     if (validate_address(start, api_key) != (None,None)) and (validate_address(destination, api_key) != (None, None)):
         url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start}&destination={destination}&mode={mode}&key={api_key}"
         response = requests.get(url)
@@ -75,8 +77,8 @@ def print_durations(durations):
 
 
 
-durations = route_durations(start, destination, api_key)
-print_durations(durations)
+#durations = route_durations(start, destination, api_key)
+#print_durations(durations)
 #print(get_directions_duration(start, destination, 'transit', api_key))
 
 

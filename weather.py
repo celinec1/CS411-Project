@@ -21,7 +21,7 @@ def get_weather(zip, api_key):
 
 # retrieve latitude and longitude from geolocate module
 
-zip = (directions.validate_address(directions.start, directions.api_key))[1]
-if zip:
+#zip = (directions.validate_address(directions.start, directions.api_key))[1]
+#if zip:
     print(get_weather(zip, api_key))
 

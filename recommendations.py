@@ -1,10 +1,10 @@
 import weather
 import directions
 
-start = '808 Commonwealth Ave Boston MA'
-destination = '528 Beacon St Boston MA'
-durations = directions.route_durations(start, destination, directions.api_key)
-zip = (directions.validate_address(start, directions.api_key))[1]
+#start = '808 Commonwealth Ave Boston MA'
+#destination = '528 Beacon St Boston MA'
+#durations = directions.route_durations(start, destination, directions.api_key)
+#zip = (directions.validate_address(start, directions.api_key))[1]
 
 
 def main(start, destination): #returns recommended mode of transportation
@@ -37,6 +37,6 @@ def shortest_time(durations): #returns shortest mode of transportation
 
 #print(durations)
 
-print(main(start, destination))
+#print(main(start, destination))
 
     
