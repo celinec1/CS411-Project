@@ -73,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 5vw;
   text-align: center;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .transportation-selection h2 {
-  margin-bottom: 20px;
+  margin-bottom: 2v2;
 }
 
 .transportation-buttons button.selected {
@@ -133,7 +133,7 @@
   border-radius: 1vw;
   padding: 1vw 1.5vw;
   font-size: 16px;
-  margin-top: 2vw;
+  margin-top: 1.5vw;
 }
 
 .button-group .previous-button {
@@ -144,7 +144,7 @@
   border-radius: 1vw;
   padding: 1vw 1.5vw;
   font-size: 16px;
-  margin-top: 2vw;
+  margin-top: -2vw;
 }
 
 .button-group .previous-button:hover {

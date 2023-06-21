@@ -170,6 +170,11 @@ const WebPage = () => {
           </div>
         )}
 
+        <div className="recommended">
+        <h3>Our Recommendation:</h3>
+            <p>{recommended}</p>
+          </div>
+
           <div className="button-group">
             <button className="previous-button" onClick={handlePrevious}>
               Previous
