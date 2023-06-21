@@ -200,9 +200,19 @@ const WebPage = () => {
           <button>Profile</button>
         </div>
 
-        <div className="playlist-section">
+        {/* <div className="playlist-section">
           <h2>Here is the Spotify playlist!</h2>
-          {backendResponse && <p>{backendResponse}</p>}
+          {backendResponse && <p>{backendResponse}</p>} */}
+         
+          <div className="playlist-section">
+  <h2>Here is the Spotify playlist!</h2>
+  {backendResponse && (
+    <p>
+      <a href={backendResponse} target="_blank" rel="noopener noreferrer">
+        {backendResponse}
+      </a>
+    </p>
+  )}
           <button className="restart-button" onClick={handleRestart}>
         Restart
       </button>
