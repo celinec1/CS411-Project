@@ -205,8 +205,8 @@ def callback():
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
-                data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
-                collection.insert_one(data)
+                # data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
+                # collection.insert_one(data)
 
 
                 # Print the user ID and other information
