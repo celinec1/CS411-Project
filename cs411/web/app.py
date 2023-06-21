@@ -58,7 +58,7 @@ def handle_transportation_selection():
     print(durations[transportation])
     print(playlist_length)
     link = create_top_tracks_playlist(user_id, access_token, playlist_length)
-    return jsonify(link)
+    return jsonify({'link': link})
 
 
 
