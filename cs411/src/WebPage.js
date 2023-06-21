@@ -160,6 +160,14 @@ const WebPage = () => {
             </div>
           )}
 
+{weather && (
+          <div className="weather-report">
+            <h3>Weather Forecast:</h3>
+            <p>{`Temperature: ${weather.temperature}`}</p>
+            <p>{`Condition: ${weather.condition}`}</p>
+          </div>
+        )}
+
           <div className="button-group">
             <button className="previous-button" onClick={handlePrevious}>
               Previous
