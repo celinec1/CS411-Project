@@ -8,7 +8,8 @@ const WebPage = () => {
   const [backendResponse, setBackendResponse] = useState(null);
   const [durations, setDurations] = useState(null);
   const [recommended, setRecommended] = useState(null);
-  const [weather, setWeather] = useState(null);
+  const [temp, setTemp] = useState(null);
+  const [condition, setCondition] = useState(null);
   const [isRestarted, setIsRestarted] = useState(false);
 
   const handleRestart = () => {
@@ -42,7 +43,8 @@ const WebPage = () => {
         console.log('Response from backend:', data);
         setDurations(data.durations);  // Store the durations
         setRecommended(data.recommended);
-        setWeather(data.forecast);
+        setTemp(data.temp);
+        setCondition(data.condition);
       } else {
         console.log('Failed to send data to backend');
       }
@@ -160,11 +162,11 @@ const WebPage = () => {
             </div>
           )}
 
-{weather && (
+{temp && (
           <div className="weather-report">
             <h3>Weather Forecast:</h3>
-            <p>{`Temperature: ${weather.temperature}`}</p>
-            <p>{`Condition: ${weather.condition}`}</p>
+            <p>{`Temperature: ${temp}`}</p>
+            <p>{`Condition: ${condition}`}</p>
           </div>
         )}
 

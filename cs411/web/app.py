@@ -38,10 +38,10 @@ def submit():
     # collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
-    forecast = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
+    temp, condition = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
 
 
-    response = {'durations' : durations, 'recommended': recommended, 'forecast': forecast}
+    response = {'durations' : durations, 'recommended': recommended, 'temp': temp, 'condition': condition}
     print(response)
     return jsonify(response)
 
