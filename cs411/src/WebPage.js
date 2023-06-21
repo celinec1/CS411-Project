@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './WebPage.css';
 
 const WebPage = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [selectedTransportation, setSelectedTransportation] = useState('');
   const [isTransportationSubmitted, setIsTransportationSubmitted] = useState(false);
-  const [backendResponse, setBackendResponse] = useState(null);
+  const [backendResponse, setBackendResponse] = useState('');
+
+  useEffect(() => {
+    console.log('backendResponse:', backendResponse);
+  }, [backendResponse]);
+
   const [durations, setDurations] = useState(null);
   const [recommended, setRecommended] = useState(null);
   const [temp, setTemp] = useState(null);
@@ -78,8 +83,9 @@ const WebPage = () => {
         const data = await response.json();
         console.log('Response from backend:', data);
         setIsTransportationSubmitted(true);
-        setBackendResponse(data); // Store the backend response in a state variable
-        console.log('backendResponse:', backendResponse); // Make sure the variable is being set
+        setBackendResponse(data.link); // Store the backend response in a state variable
+
+        console.log('backendResponse:', backendResponse);
       } else {
         console.log('Failed to fetch response from backend');
       }
@@ -196,7 +202,7 @@ const WebPage = () => {
 
         <div className="playlist-section">
           <h2>Here is the Spotify playlist!</h2>
-          {backendResponse && <p>{backendResponse.message}</p>}
+          {backendResponse && <p>{backendResponse}</p>}
           <button className="restart-button" onClick={handleRestart}>
         Restart
       </button>
