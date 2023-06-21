@@ -17,15 +17,9 @@ sys.path.append(grandparent_directory)
 import directions, weather, recommendations
 from pymongo import MongoClient
 
-# Create a MongoClient to interact with MongoDB
-client = MongoClient('mongodb://localhost:27017/')
-
-# Select database
-db = client['CommuteBeatData']
-
-# Select collection within the database
-collection = db['SpotifyUserData']
-
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client['CommuteBeatData']
+# collection = db['CommuteBeatData.SpotifyUserData']
 
 app = Flask(__name__)
 CORS(app)
@@ -50,10 +44,10 @@ def submit():
     collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
-    forecast = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
+    temp, condition = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
 
 
-    response = {'durations' : durations, 'recommended': recommended, 'forecast': forecast}
+    response = {'durations' : durations, 'recommended': recommended, 'temp': temp, 'condition': condition}
     print(response)
     return jsonify(response)
 
@@ -70,7 +64,7 @@ def handle_transportation_selection():
     print(durations[transportation])
     print(playlist_length)
     link = create_top_tracks_playlist(user_id, access_token, playlist_length)
-    return jsonify(link)
+    return jsonify({'link': link})
 
 
 
@@ -203,8 +197,8 @@ def callback():
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
-                data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
-                result = collection.insert_one(data)
+                # data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
+                # collection.insert_one(data)
 
 
                 # Print the user ID and other information
@@ -234,6 +228,8 @@ def callback():
                 return jsonify({'error': error_message})
 
     return jsonify({'error': 'Access token not obtained.'})
+
+# client.close()
 
 # access_token = access
 num_songs = 20  # Number of random songs in the playlist

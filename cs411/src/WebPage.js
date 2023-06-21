@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './WebPage.css';
 
 const WebPage = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [selectedTransportation, setSelectedTransportation] = useState('');
   const [isTransportationSubmitted, setIsTransportationSubmitted] = useState(false);
-  const [backendResponse, setBackendResponse] = useState(null);
+  const [backendResponse, setBackendResponse] = useState('');
+
+  useEffect(() => {
+    console.log('backendResponse:', backendResponse);
+  }, [backendResponse]);
+
   const [durations, setDurations] = useState(null);
   const [recommended, setRecommended] = useState(null);
-  const [weather, setWeather] = useState(null);
+  const [temp, setTemp] = useState(null);
+  const [condition, setCondition] = useState(null);
   const [isRestarted, setIsRestarted] = useState(false);
 
   const handleRestart = () => {
@@ -42,7 +48,8 @@ const WebPage = () => {
         console.log('Response from backend:', data);
         setDurations(data.durations);  // Store the durations
         setRecommended(data.recommended);
-        setWeather(data.forecast);
+        setTemp(data.temp);
+        setCondition(data.condition);
       } else {
         console.log('Failed to send data to backend');
       }
@@ -76,8 +83,9 @@ const WebPage = () => {
         const data = await response.json();
         console.log('Response from backend:', data);
         setIsTransportationSubmitted(true);
-        setBackendResponse(data); // Store the backend response in a state variable
-        console.log('backendResponse:', backendResponse); // Make sure the variable is being set
+        setBackendResponse(data.link); // Store the backend response in a state variable
+
+        console.log('backendResponse:', backendResponse);
       } else {
         console.log('Failed to fetch response from backend');
       }
@@ -160,13 +168,18 @@ const WebPage = () => {
             </div>
           )}
 
-{weather && (
+{temp && (
           <div className="weather-report">
             <h3>Weather Forecast:</h3>
-            <p>{`Temperature: ${weather.temperature}`}</p>
-            <p>{`Condition: ${weather.condition}`}</p>
+            <p>{`Temperature: ${temp}`}</p>
+            <p>{`Condition: ${condition}`}</p>
           </div>
         )}
+
+        <div className="recommended">
+        <h3>Our Recommendation:</h3>
+            <p>{recommended}</p>
+          </div>
 
           <div className="button-group">
             <button className="previous-button" onClick={handlePrevious}>
@@ -187,9 +200,19 @@ const WebPage = () => {
           <button>Profile</button>
         </div>
 
-        <div className="playlist-section">
+        {/* <div className="playlist-section">
           <h2>Here is the Spotify playlist!</h2>
-          {backendResponse && <p>{backendResponse.message}</p>}
+          {backendResponse && <p>{backendResponse}</p>} */}
+         
+          <div className="playlist-section">
+  <h2>Here is the Spotify playlist!</h2>
+  {backendResponse && (
+    <p>
+      <a href={backendResponse} target="_blank" rel="noopener noreferrer">
+        {backendResponse}
+      </a>
+    </p>
+  )}
           <button className="restart-button" onClick={handleRestart}>
         Restart
       </button>
