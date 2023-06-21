@@ -5,15 +5,27 @@ from flask_cors import CORS
 import requests
 from urllib.parse import quote
 
+import os
 import sys
-sys.path.append('../../../CS411-Project')
+
+# Get the grandparent directory of the current file (app.py)
+grandparent_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Add grandparent directory to sys.path
+sys.path.append(grandparent_directory)
 
 import directions, weather, recommendations
-# from pymongo import MongoClient
+from pymongo import MongoClient
 
-# client = MongoClient('mongodb://localhost:27017/')
-# db = client['CommuteBeatData']
-# collection = db['CommuteBeatData.SpotifyUserData']
+# Create a MongoClient to interact with MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+
+# Select database
+db = client['CommuteBeatData']
+
+# Select collection within the database
+collection = db['SpotifyUserData']
+
 
 app = Flask(__name__)
 CORS(app)
@@ -32,10 +44,10 @@ def submit():
 
     global durations
     durations = directions.route_durations(location, destination, directions.api_key)
-    #durations = list[durations]
+    durations = list(durations)
     
-    # data = {'Location': location, 'Destination': destination}
-    # collection.insert_one(data)
+    data = {'Location': location, 'Destination': destination}
+    collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
     forecast = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
@@ -135,8 +147,8 @@ def create_top_tracks_playlist(user_id, access_token, length):
                 link = f'https://open.spotify.com/playlist/{playlist_id}'
                 print(link)
 
-                # data = {'Playlist': link}
-                # collection.insert_one(data)
+                data = {'Playlist': link}
+                collection.insert_one(data)
 
                 return link
             else:
@@ -191,8 +203,9 @@ def callback():
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
-                # data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
-                # collection.insert_one(data)
+                data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
+                result = collection.insert_one(data)
+
 
                 # Print the user ID and other information
                 print('User ID:', user_id)
@@ -208,16 +221,19 @@ def callback():
                     'Display Name': display_name,
                     'Email': email,
                 }
+                # Insert the data into the collection
+                
+                result = collection.insert_one(response_data)
+    
+                # Return a success message with the ID of the inserted document
+                return jsonify({"message": "Data inserted successfully", "id": str(result.inserted_id)})
 
-                return jsonify(response_data)
 
             else:
                 error_message = profile_data.get('error', {}).get('message')
                 return jsonify({'error': error_message})
 
     return jsonify({'error': 'Access token not obtained.'})
-
-# client.close()
 
 # access_token = access
 num_songs = 20  # Number of random songs in the playlist
