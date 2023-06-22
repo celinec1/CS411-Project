@@ -293,9 +293,10 @@ def submit():
     temp, condition = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
 
 
-    response = {'durations' : durations, 'recommended': recommended, 'temp': temp, 'condition': condition}
+    response = {'driving' : durations['driving'][0], 'bicycling': durations['bicycling'][0], 'transit': durations['transit'][0], 'walking': durations['walking'][0], 'recommended' : recommended, 'temp': temp, 'condition': condition}
     print(response)
     return jsonify(response)
+
 
 @app.route('/api/transportation', methods=['POST'])
 def handle_transportation_selection():
@@ -471,6 +472,6 @@ def callback():
 
 
 # access_token = access
-num_songs = 20  # Number of random songs in the playlist
+
 if __name__ == '__main__':
     app.run(host='localhost', port=8000, debug=True)
