@@ -11,7 +11,10 @@ const WebPage = () => {
     console.log('backendResponse:', backendResponse);
   }, [backendResponse]);
 
-  const [durations, setDurations] = useState(null);
+  const[driving, setDriving] = useState(null);
+  const[bicycling, setBicycling] = useState(null);
+  const[transit, setTransit] = useState(null);
+  const[walking, setWalking] = useState(null);
   const [recommended, setRecommended] = useState(null);
   const [temp, setTemp] = useState(null);
   const [condition, setCondition] = useState(null);
@@ -46,7 +49,10 @@ const WebPage = () => {
         console.log('Data sent to backend successfully');
         const data = await response.json();
         console.log('Response from backend:', data);
-        setDurations(data.durations);  // Store the durations
+        setDriving(data.driving);
+        setBicycling(data.bicycling);
+        setTransit(data.transit);
+        setWalking(data.walking);
         setRecommended(data.recommended);
         setTemp(data.temp);
         setCondition(data.condition);
@@ -124,7 +130,7 @@ const WebPage = () => {
         <div className="transportation-selection">
           <h2>Select mode of transportation:</h2>
 
-          {durations && (
+          {driving && (
             <div className="transportation-buttons">
               <div>
                 <button
@@ -133,7 +139,7 @@ const WebPage = () => {
                 >
                   Driving
                 </button>
-                <p>{durations.driving[0]}</p>
+                <p>{driving}</p>
               </div>
 
               <div>
@@ -143,7 +149,7 @@ const WebPage = () => {
                 >
                   Bicycling
                 </button>
-                <p>{durations.bicycling[0]}</p>
+                <p>{bicycling}</p>
               </div>
 
               <div>
@@ -153,7 +159,7 @@ const WebPage = () => {
                 >
                   Transit
                 </button>
-                <p>{durations.transit[0]}</p>
+                <p>{transit}</p>
               </div>
 
               <div>
@@ -163,7 +169,7 @@ const WebPage = () => {
                 >
                   Walking
                 </button>
-                <p>{durations.walking[0]}</p>
+                <p>{walking}</p>
               </div>
             </div>
           )}
