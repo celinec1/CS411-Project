@@ -8,7 +8,7 @@ import WebPage from './WebPage'
 function App() {
     return (
       <div className="App">
-        <Home_page />
+        {/* <Home_page /> */}
         <WebPage />
         <header className="App-header"> </header>
       </div>
