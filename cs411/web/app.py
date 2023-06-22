@@ -15,10 +15,10 @@ connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongo
 client = MongoClient(connection_string)
 
 # Select your database
-db = client['Testing'] # Replace 'YourDatabaseName' with your database name
+db = client['Testing']
 
 # Select the collection within the database
-collection = db['test'] # Replace 'YourCollectionName' with your collection name
+collection = db['test']
 
 # Get the grandparent directory of the current file (app.py)
 grandparent_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
