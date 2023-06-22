@@ -263,9 +263,15 @@ sys.path.append(grandparent_directory)
 import directions, weather, recommendations
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017/')
-db = client['CommuteBeatData']
-collection = db['CommuteBeatData.SpotifyUserData']
+connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
+# Create a MongoClient to interact with MongoDB Atlas
+client = MongoClient(connection_string)
+
+# Select your database
+db = client['Testing']
+
+# Select the collection within the database
+collection = db['test']
 
 app = Flask(__name__)
 CORS(app)
@@ -461,6 +467,7 @@ def callback():
                     'Display Name': display_name,
                     'Email': email,
                 }
+
 
                 return jsonify(response_data)
 
