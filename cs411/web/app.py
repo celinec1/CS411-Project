@@ -72,6 +72,8 @@ def handle_transportation_selection():
     print(durations[transportation])
     print(playlist_length)
     link = create_top_tracks_playlist(user_id, access_token, playlist_length)
+    data = {'Playlist': link,}
+    collection.insert_one(data)
     return jsonify({'link': link})
 
 
@@ -149,8 +151,7 @@ def create_top_tracks_playlist(user_id, access_token, length):
                 link = f'https://open.spotify.com/playlist/{playlist_id}'
                 print(link)
 
-                data = {'Playlist': link}
-                collection.insert_one(data)
+                
 
                 return link
             else:
