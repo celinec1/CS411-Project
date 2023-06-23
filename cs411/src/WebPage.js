@@ -113,8 +113,9 @@ const WebPage = () => {
       <div>
         <div className="navbar">
           <h1>CommuteBeat</h1>
-          <button>Profile</button>
-          <button onClick={handleLogout}>Logout</button>
+          <button className="profile-button">Profile</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+
         </div>
 
         <div className="user-input">
@@ -130,10 +131,18 @@ const WebPage = () => {
   } else if (!isTransportationSubmitted) {
     return (
       <div>
-        <div className="navbar">
+        {/* <div className="navbar">
           <h1>CommuteBeat</h1>
           <button>Profile</button>
-        </div>
+        </div> */}
+        <div className="navbar">
+  <h1>CommuteBeat</h1>
+  <div className="button-wrapper">
+    <button className="profile-button">Profile</button>
+    <button className="logout-button" onClick={handleLogout}>Logout</button>
+  </div>
+</div>
+
 
         <div className="transportation-selection">
           <h2>Select mode of transportation:</h2>

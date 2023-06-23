@@ -7,7 +7,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   background-color: #f2f2f2;
   padding: 1.5vw;
 }
@@ -24,11 +24,25 @@
   border-radius: 1vw;
   padding: 1vw 1.5vw;
   font-size: 16px;
+  margin-right: 0vw
 }
+.button-wrapper {
+  display: flex;
+}
+
 
 .navbar button:hover {
   background-color: rgb(55, 111, 55);
 }
+
+ .navbar .profile-button {
+  margin-right: -65vw
+}
+
+/* .navbar .logout-button {
+  margin-right: 1vw; 
+}  */
+
 
 .user-input {
   display: flex;
