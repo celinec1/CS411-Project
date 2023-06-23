@@ -26,6 +26,13 @@ const WebPage = () => {
     setIsRestarted(true);
   };
 
+  //log out
+  const handleLogout = () => {
+    localStorage.removeItem('spotifyAuthToken'); // Replace 'spotifyAuthToken' with the key you used to store the Spotify token.
+    window.location.href = "http://localhost:3000/"; // Redirect to login page (or whichever page you want the user to be redirected to after logout).
+  };
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const location = event.target.locationInput.value;
@@ -107,6 +114,7 @@ const WebPage = () => {
         <div className="navbar">
           <h1>CommuteBeat</h1>
           <button>Profile</button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
 
         <div className="user-input">
