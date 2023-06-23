@@ -261,17 +261,17 @@ grandparent_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.
 sys.path.append(grandparent_directory)
 
 import directions, weather, recommendations
-from pymongo import MongoClient
+# from pymongo import MongoClient
 
-connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
-# Create a MongoClient to interact with MongoDB Atlas
-client = MongoClient(connection_string)
+# connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
+# # Create a MongoClient to interact with MongoDB Atlas
+# client = MongoClient(connection_string)
 
-# Select your database
-db = client['Testing']
+# # Select your database
+# db = client['Testing']
 
-# Select the collection within the database
-collection = db['test']
+# # Select the collection within the database
+# collection = db['test']
 
 app = Flask(__name__)
 CORS(app)
@@ -293,7 +293,7 @@ def submit():
     #durations = list[durations]
     
     data = {'Location': location, 'Destination': destination}
-    collection.insert_one(data)
+    # collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
     temp, condition = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
@@ -395,7 +395,7 @@ def create_top_tracks_playlist(user_id, access_token, length):
                 print(link)
 
                 data = {'Playlist': link}
-                collection.insert_one(data)
+                # collection.insert_one(data)
 
                 return link
             else:
@@ -451,7 +451,7 @@ def callback():
                 email = profile_data.get('email')
 
                 data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
-                collection.insert_one(data)
+                # collection.insert_one(data)
 
                 # Print the user ID and other information
                 print('User ID:', user_id)
