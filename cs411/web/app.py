@@ -469,12 +469,15 @@ def callback():
                 }
 
 
-                return jsonify(response_data)
+                #return jsonify(response_data)
+                return redirect("http://localhost:3000/webpage")
+            
 
             else:
                 error_message = profile_data.get('error', {}).get('message')
                 return jsonify({'error': error_message})
-
+        
+    
     return jsonify({'error': 'Access token not obtained.'})
 
 
