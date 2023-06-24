@@ -31,6 +31,11 @@ const WebPage = () => {
     localStorage.removeItem('spotifyAuthToken'); // Replace 'spotifyAuthToken' with the key you used to store the Spotify token.
     window.location.href = "http://localhost:3000/"; // Redirect to login page (or whichever page you want the user to be redirected to after logout).
   };
+
+  //profile
+  const handleprofile = () => {
+    window.location.href = "http://localhost:3000/profile"; 
+  };
   
 
   const handleSubmit = async (event) => {
@@ -113,9 +118,11 @@ const WebPage = () => {
       <div>
         <div className="navbar">
           <h1>CommuteBeat</h1>
-          <button className="profile-button">Profile</button>
+          <div className="button-wrapper">
+          <button className="profile-button" onClick={handleprofile}>Profile</button>
           <button className="logout-button" onClick={handleLogout}>Logout</button>
 
+        </div>
         </div>
 
         <div className="user-input">
@@ -135,10 +142,10 @@ const WebPage = () => {
           <h1>CommuteBeat</h1>
           <button>Profile</button>
         </div> */}
-        <div className="navbar">
+        <div className="navbar2">
   <h1>CommuteBeat</h1>
   <div className="button-wrapper">
-    <button className="profile-button">Profile</button>
+  <button className="profile-button" onClick={handleprofile}>Profile</button>
     <button className="logout-button" onClick={handleLogout}>Logout</button>
   </div>
 </div>
@@ -220,7 +227,10 @@ const WebPage = () => {
       <div>
         <div className="navbar">
           <h1>CommuteBeat</h1>
-          <button>Profile</button>
+          <div className="button-wrapper">
+          <button className="profile-button" onClick={handleprofile}>Profile</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        </div>
         </div>
 
         {/* <div className="playlist-section">
