@@ -26,6 +26,18 @@ const WebPage = () => {
     setIsRestarted(true);
   };
 
+  //log out
+  const handleLogout = () => {
+    localStorage.removeItem('spotifyAuthToken'); // Replace 'spotifyAuthToken' with the key you used to store the Spotify token.
+    window.location.href = "http://localhost:3000/"; // Redirect to login page (or whichever page you want the user to be redirected to after logout).
+  };
+
+  //profile
+  const handleprofile = () => {
+    window.location.href = "http://localhost:3000/profile"; 
+  };
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const location = event.target.locationInput.value;
@@ -106,7 +118,11 @@ const WebPage = () => {
       <div>
         <div className="navbar">
           <h1>CommuteBeat</h1>
-          <button>Profile</button>
+          <div className="button-wrapper">
+          <button className="profile-button" onClick={handleprofile}>Profile</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+
+        </div>
         </div>
 
         <div className="user-input">
@@ -122,10 +138,18 @@ const WebPage = () => {
   } else if (!isTransportationSubmitted) {
     return (
       <div>
-        <div className="navbar">
+        {/* <div className="navbar">
           <h1>CommuteBeat</h1>
           <button>Profile</button>
-        </div>
+        </div> */}
+        <div className="navbar2">
+  <h1>CommuteBeat</h1>
+  <div className="button-wrapper">
+  <button className="profile-button" onClick={handleprofile}>Profile</button>
+    <button className="logout-button" onClick={handleLogout}>Logout</button>
+  </div>
+</div>
+
 
         <div className="transportation-selection">
           <h2>Select mode of transportation:</h2>
@@ -203,7 +227,10 @@ const WebPage = () => {
       <div>
         <div className="navbar">
           <h1>CommuteBeat</h1>
-          <button>Profile</button>
+          <div className="button-wrapper">
+          <button className="profile-button" onClick={handleprofile}>Profile</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        </div>
         </div>
 
         {/* <div className="playlist-section">

@@ -16,14 +16,14 @@ import directions, weather, recommendations
 from pymongo import MongoClient
 
 connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
-# Create a MongoClient to interact with MongoDB Atlas
+# # Create a MongoClient to interact with MongoDB Atlas
 client = MongoClient(connection_string)
 
-# Select your database
+# # Select your database
 db = client['Testing']
 
-# Select the collection within the database
-collection = db['test']
+# # Select the collection within the database
+collection = db['lindsay_test']
 
 app = Flask(__name__)
 CORS(app)
@@ -44,8 +44,10 @@ def submit():
     durations = directions.route_durations(location, destination, directions.api_key)
     #durations = list[durations]
     
-    data = {'Location': location, 'Destination': destination}
-    collection.insert_one(data)
+    global loco_data
+    loco_data = [location, destination]
+    #user_data.update(loco_data) #idk why but commenting out this line breaks everything LOL
+    #collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
     temp, condition = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
@@ -69,6 +71,21 @@ def handle_transportation_selection():
     print(durations[transportation])
     print(playlist_length)
     link = create_top_tracks_playlist(user_id, access_token, playlist_length)
+    trip_data = [transportation, link]
+    trip_data += loco_data
+
+    print(trip_data)
+
+    existing_user = collection.find_one({'User ID': user_id})
+    if existing_user:
+        #collection.update_one({'User ID': user_id}, {'$set': {'trip': []}})
+        collection.update_one({'User ID': user_id}, {'$push': {'trip': trip_data}})
+        print('collection updated')
+    else:
+        user_data['trip'] = [trip_data]
+        collection.insert_one(user_data)
+        print('new object created')
+
     return jsonify({'link': link})
 
 
@@ -146,21 +163,8 @@ def create_top_tracks_playlist(user_id, access_token, length):
                 link = f'https://open.spotify.com/playlist/{playlist_id}'
                 print(link)
 
-                # Query the database for the email
-                existing_user = collection.find_one({'Email': email})
-
-                if existing_user:
-                    # The user already exists in the database, update the document with the new playlist link
-                    collection.update_one(
-                        {'Email': email},
-                        {'$push': {'Playlists': link}} # Push the new playlist link to the 'Playlists' array field
-                    )
-                    print('Playlist link added to existing user document.')
-                else:
-                    # The user does not exist, insert a new document with the playlist link
-                    data = {'Email': email, 'Playlists': [link]} # Note that 'Playlists' is an array containing the link
-                    collection.insert_one(data)
-                    print('New user document inserted with playlist link.')
+                data = {'Playlist': link}
+                #collection.insert_one(data)
 
                 return link
             else:
@@ -194,7 +198,6 @@ def callback():
         global access_token
         access_token = token_response.get('access_token')
         refresh_token = token_response.get('refresh_token')
-
         
         if access_token:
             # Example API request: Get user profile information
@@ -214,30 +217,21 @@ def callback():
                 global user_id
                 global email
                 user_id = profile_data.get('id')
+                print(user_id)
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
-                existing_user = collection.find_one({'Email': email})
+                global user_data
+                user_data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
+                #collection.insert_one(data)
 
-                if existing_user:
-                # The email already exists in the database, print the data
-                    print("User data already in database:")
-                    previousid = existing_user['User ID']
-                    # previousplaylist = existing_user['Playlist']
-                    print("User ID:", existing_user['User ID'])
-                    print("Display Name:", existing_user['Display Name'])
-                    print("Email:", existing_user['Email'])
-                    # print("Previous Playlists", existing_user['Playlist'])
-                    response_data = {
-                        'Previous ID': previousid,
-                        # 'Previous Playlist': previousplaylist,
-                    }
+                # Print the user ID and other information
+                print('User ID:', user_id)
+                print('Display Name:', display_name)
+                print('Email:', email)
 
-                else:
-                # The email does not exist, insert the data
-                    data = {'User ID': user_id, 'Display Name': display_name, 'Email': email}
-                    collection.insert_one(data)
-                    print('New user inserted into the database')
+                # Add any additional processing or rendering logic as needed
+                #create_top_tracks_playlist(user_id, access_token, num_songs, 1200)
 
                     response_data = {
                         'User_ID': user_id,
@@ -245,12 +239,16 @@ def callback():
                         'Email': email,
                     }
 
-                    return jsonify(response_data)
-                return jsonify(response_data)
+
+                #return jsonify(response_data)
+                return redirect("http://localhost:3000/webpage")
+            
+
             else:
                 error_message = profile_data.get('error', {}).get('message')
                 return jsonify({'error': error_message})
-
+        
+    
     return jsonify({'error': 'Access token not obtained.'})
 
 
