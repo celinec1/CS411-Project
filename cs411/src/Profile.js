@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
 
 const Profile = () => {
-    const handleLogout = () => {
-        localStorage.removeItem('spotifyAuthToken'); // Replace 'spotifyAuthToken' with the key you used to store the Spotify token.
-        window.location.href = "http://localhost:3000/"; // Redirect to login page (or whichever page you want the user to be redirected to after logout).
-      };
+  const [trips, setTrips] = useState([]);
 
-      const handleHome= () => {
-        window.location.href = "http://localhost:3000/webpage"; // Redirect to login page (or whichever page you want the user to be redirected to after logout).
-      };
-    
+  const handleLogout = () => {
+    localStorage.removeItem('spotifyAuthToken');
+    window.location.href = "http://localhost:3000/";
+  };
+
+  const handleHome = () => {
+    window.location.href = "http://localhost:3000/webpage";
+  };
+
+  useEffect(() => {
+    // Fetch the past trips from your backend API
+    fetch('/api/past_trips')
+      .then(response => response.json())
+      .then(data => setTrips(data.trips))
+      .catch(error => console.log(error));
+  }, []);
+
   return (
     <div className="navbar">
       <h1>CommuteBeat</h1>
       <div className="button-wrapper">
-      <button className="home-button" onClick={handleHome}>Home</button>
-      <button className="logout-button" onClick={handleLogout}>Logout</button>
+        <button className="home-button" onClick={handleHome}>Home</button>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
+      </div>
+
+      <div className="past-trips">
+        <h2>Past Trips</h2>
+        <ul>
+          {trips.map((trip, index) => (
+            <li key={index}>
+              <p>Transportation: {trip.transportation}</p>
+              <p>Link: {trip.link}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
