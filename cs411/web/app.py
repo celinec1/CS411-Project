@@ -45,8 +45,8 @@ def submit():
     #durations = list[durations]
     
     global loco_data
-    loco_data = {'Location': location, 'Destination': destination}
-    loco_data.update(user_data)
+    loco_data = [location, destination]
+    #user_data.update(loco_data) #idk why but commenting out this line breaks everything LOL
     #collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
@@ -71,9 +71,20 @@ def handle_transportation_selection():
     print(durations[transportation])
     print(playlist_length)
     link = create_top_tracks_playlist(user_id, access_token, playlist_length)
-    final_data = {'transportation': transportation, 'link': link}
-    final_data.update(loco_data)
-    collection.insert_one(final_data)
+    trip_data = [transportation, link]
+    trip_data += loco_data
+
+    print(trip_data)
+
+    existing_user = collection.find_one({'User ID': user_id})
+    if existing_user:
+        #collection.update_one({'User ID': user_id}, {'$set': {'trip': []}})
+        collection.update_one({'User ID': user_id}, {'$push': {'trip': trip_data}})
+        print('collection updated')
+    else:
+        user_data['trip'] = [trip_data]
+        collection.insert_one(user_data)
+        print('new object created')
 
     return jsonify({'link': link})
 
@@ -205,6 +216,7 @@ def callback():
                 # Extract user ID from the response
                 global user_id
                 user_id = profile_data.get('id')
+                print(user_id)
                 display_name = profile_data.get('display_name')
                 email = profile_data.get('email')
 
