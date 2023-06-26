@@ -233,11 +233,7 @@ def callback():
                 # Add any additional processing or rendering logic as needed
                 #create_top_tracks_playlist(user_id, access_token, num_songs, 1200)
 
-                    response_data = {
-                        'User_ID': user_id,
-                        'Display Name': display_name,
-                        'Email': email,
-                    }
+                response_data = {'User_ID': user_id, 'Display Name': display_name, 'Email': email,}
 
 
                 #return jsonify(response_data)
