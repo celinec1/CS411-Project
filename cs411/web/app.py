@@ -296,7 +296,6 @@ def past_trips():
         response = jsonify({'trips': trip_list})
 
         return(response)
-        return response
 
     else:
         print(f"No user found with ID: {user_id}")
