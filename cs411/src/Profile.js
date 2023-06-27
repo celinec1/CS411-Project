@@ -17,7 +17,7 @@ const Profile = () => {
     // Function to fetch past trips
     const fetchPastTrips = async () => {
         try {
-            const response = await fetch('/api/past_trips');
+            const response = await fetch('http://localhost:3000/api/past_trips');
             const data = await response.json();
 
             // Convert the response to an array

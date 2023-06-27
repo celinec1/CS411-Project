@@ -251,12 +251,8 @@ def callback():
 from flask import request, jsonify, make_response
 
 @app.route('/api/past_trips', methods=['GET'])
-def past_trips():
+def past_trips(n):
     # Get the 'n' query parameter, default to 10 if not provided
-    n = request.args.get('n', default=10, type=int)
-
-    # Get the user_id from the request (this should be adjusted based on how you're passing the user_id)
-    user_id = request.args.get('user_id')
 
     if user_id:
         user_doc = collection.find_one({'User ID': user_id})
