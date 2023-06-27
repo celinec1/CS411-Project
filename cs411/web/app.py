@@ -282,7 +282,6 @@ def past_trips():
     if user_doc:
         # Retrieve the trip history array
         trip_history = user_doc.get('trip', [])
-
         num_trips = len(trip_history)
 
         if num_trips < n:
@@ -290,8 +289,13 @@ def past_trips():
         for i in range(n):
             response[f"{i}"] = trip_history[i]
             print(trip_history[i])
+            #print(trip_history[i])
+        print(response)
+        trip_list = [{key: value[i] for i, key in enumerate(['transportation', 'link', 'location', 'destination'])} for key, value in response.items()]
+        response = jsonify({'trips': trip_list})
 
         return(response)
+        return response
 
     else:
         print(f"No user found with ID: {user_id}")
