@@ -15,11 +15,11 @@ sys.path.append(grandparent_directory)
 import directions, weather, recommendations
 from pymongo import MongoClient
 
-connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
-# # Create a MongoClient to interact with MongoDB Atlas
-client = MongoClient(connection_string)
+# connection_string = 'mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing'
+# # # Create a MongoClient to interact with MongoDB Atlas
+# client = MongoClient(connection_string)
 
-# client = MongoClient("mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing", tls=True,  tlsAllowInvalidCertificates=True)
+client = MongoClient("mongodb+srv://lkk19:IONc14XUBjIgI9Oi@cluster0.6oclfrh.mongodb.net/Testing", tls=True,  tlsAllowInvalidCertificates=True)
 # # Select your database
 db = client['Testing']
 

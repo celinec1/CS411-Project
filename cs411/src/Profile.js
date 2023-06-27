@@ -57,11 +57,9 @@ const Profile = () => {
       <div className="content">
         <h2>Past Trips</h2>
         <Table dataSource={trips}>
-          <ColumnGroup title="Trip Info">
             <Column title="Location" dataIndex="location" key="location" />
             <Column title="Destination" dataIndex="destination" key="destination" />
             <Column title="Transportation" dataIndex="transportation" key="transportation" />
-          </ColumnGroup>
             <Column title="Link" dataIndex="link" key="link" />
         </Table>
       </div>
