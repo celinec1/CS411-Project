@@ -138,23 +138,18 @@ const WebPage = () => {
   } else if (!isTransportationSubmitted) {
     return (
       <div>
-        {/* <div className="navbar">
-          <h1>CommuteBeat</h1>
-          <button>Profile</button>
-        </div> */}
         <div className="navbar2">
-  <h1>CommuteBeat</h1>
-  <div className="button-wrapper">
-  <button className="profile-button" onClick={handleprofile}>Profile</button>
-    <button className="logout-button" onClick={handleLogout}>Logout</button>
-  </div>
-</div>
-
-
+          <h1>CommuteBeat</h1>
+          <div className="button-wrapper">
+            <button className="profile-button" onClick={handleprofile}>Profile</button>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
+  
         <div className="transportation-selection">
           <h2>Select mode of transportation:</h2>
-
-          {driving && (
+  
+          {driving && driving.length > 0 ? (
             <div className="transportation-buttons">
               <div>
                 <button
@@ -165,7 +160,15 @@ const WebPage = () => {
                 </button>
                 <p>{driving}</p>
               </div>
-
+            </div>
+          ) : (
+            <div>
+              <p>{!driving ? 'Driving mode not available' : 'No valid modes of transportation found'}</p>
+            </div>
+          )}
+  
+          {bicycling && bicycling.length > 0 ? (
+            <div className="transportation-buttons">
               <div>
                 <button
                   className={`transportation-button ${selectedTransportation === 'bicycling' ? 'selected' : ''}`}
@@ -175,7 +178,15 @@ const WebPage = () => {
                 </button>
                 <p>{bicycling}</p>
               </div>
-
+            </div>
+          ) : (
+            <div>
+              <p>{!bicycling ? 'Bicycling mode not available' : 'No valid modes of transportation found'}</p>
+            </div>
+          )}
+  
+          {transit && transit.length > 0 ? (
+            <div className="transportation-buttons">
               <div>
                 <button
                   className={`transportation-button ${selectedTransportation === 'transit' ? 'selected' : ''}`}
@@ -185,7 +196,15 @@ const WebPage = () => {
                 </button>
                 <p>{transit}</p>
               </div>
-
+            </div>
+          ) : (
+            <div>
+              <p>{!transit ? 'Transit mode not available' : 'No valid modes of transportation found'}</p>
+            </div>
+          )}
+  
+          {walking && walking.length > 0 ? (
+            <div className="transportation-buttons">
               <div>
                 <button
                   className={`transportation-button ${selectedTransportation === 'walking' ? 'selected' : ''}`}
@@ -196,7 +215,13 @@ const WebPage = () => {
                 <p>{walking}</p>
               </div>
             </div>
+          ) : (
+            <div>
+              <p>{!walking ? 'Walking mode not available' : 'No valid modes of transportation found'}</p>
+            </div>
           )}
+  
+          
 
 {temp && (
           <div className="weather-report">

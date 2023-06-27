@@ -248,27 +248,32 @@ def callback():
     
     return jsonify({'error': 'Access token not obtained.'})
 
-@app.route('/api/past_trips', methods=['POST'])
+from flask import request, jsonify, make_response
+
+@app.route('/api/past_trips', methods=['GET'])
 def past_trips(n):
-    response = {}
-    user_doc = collection.find_one({'User ID': user_id})
+    # Get the 'n' query parameter, default to 10 if not provided
 
-    if user_doc:
-        # Retrieve the trip history array
-        trip_history = user_doc.get('trip', [])
+    if user_id:
+        user_doc = collection.find_one({'User ID': user_id})
 
-        num_trips = len(trip_history)
+        if user_doc:
+            # Retrieve the trip history array
+            trip_history = user_doc.get('trip', [])
 
-        if num_trips < n:
-            n = num_trips
-        for i in range(n):
-            response[f"{i}"] = trip_history[i]
-            print(trip_history[i])
+            # Limit to 'n' number of trips
+            limited_trips = trip_history[:n]
 
-        return(response)
+            # Convert list of trips to dictionary format
+            response = {str(index): trip for index, trip in enumerate(limited_trips)}
 
+            return jsonify(response)
+        else:
+            # Return a 404 error response if no user is found
+            return make_response(jsonify({'error': f"No user found with ID: {user_id}"}), 404)
     else:
-        print(f"No user found with ID: {user_id}")
+        # Return a 400 error response if no user_id is provided
+        return make_response(jsonify({'error': "No user_id provided"}), 400)
 
 
 # access_token = access
