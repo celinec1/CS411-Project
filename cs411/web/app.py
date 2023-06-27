@@ -404,6 +404,7 @@ def index():
         'response_type': 'code',
         'redirect_uri': quote('http://localhost:8000/callback', safe=''),
         'scope': 'user-read-private user-read-email user-top-read playlist-modify-private',
+        'show_dialog': 'true',
         # Add necessary scopes
     }
 
