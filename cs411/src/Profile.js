@@ -17,31 +17,52 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    // Fetch the past trips from your backend API
-    fetch('/api/past_trips')
+    setTimeout(() => {
+      console.log('setTrips data', trips);
+    }, 1000); // Delay for 1 second to allow time for state update
+  }, [trips]);
+  
+  useEffect(() => {
+    fetch('http://localhost:8000/past_trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then((response) => response.json())
-      .then((data) => setTrips(data.trips))
+      .then((data) => {
+        console.log('trips response', data.trips);
+        if (Array.isArray(data.trips) && data.trips.length > 0) {
+          setTrips(data.trips); // Assuming the inner array is the desired array of dictionaries
+        }
+        console.log('updated trips', trips);
+      })
       .catch((error) => console.log(error));
-      console.log('trip data:', trips);
   }, []);
 
   return (
-    <div className="navbar">
-      <h1>CommuteBeat</h1>
-      <div className="button-wrapper">
-        <button className="home-button" onClick={handleHome}>
-          Home
-        </button>
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
+    <div>
+      <div className="navbar">
+        <h1>CommuteBeat</h1>
+        <div className="button-wrapper">
+          <button className="home-button" onClick={handleHome}>
+            Home
+          </button>
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
 
-      <div className="past-trips">
+      <div className="content">
         <h2>Past Trips</h2>
         <Table dataSource={trips}>
-          <Column title="Transportation" dataIndex="transportation" key="transportation" />
-          <Column title="Link" dataIndex="link" key="link" />
+          <ColumnGroup title="Trip Info">
+            <Column title="Location" dataIndex="location" key="location" />
+            <Column title="Destination" dataIndex="destination" key="destination" />
+            <Column title="Transportation" dataIndex="transportation" key="transportation" />
+          </ColumnGroup>
+            <Column title="Link" dataIndex="link" key="link" />
         </Table>
       </div>
     </div>

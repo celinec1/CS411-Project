@@ -86,7 +86,7 @@ def handle_transportation_selection():
         collection.insert_one(user_data)
         print('new object created')
     
-    past_trips(10)
+    #past_trips(10)
     return jsonify({'link': link})
 
 
@@ -248,8 +248,9 @@ def callback():
     
     return jsonify({'error': 'Access token not obtained.'})
 
-@app.route('/api/past_trips', methods=['POST'])
-def past_trips(n):
+@app.route('/past_trips', methods=['POST'])
+def past_trips():
+    n = 10
     response = {}
     user_doc = collection.find_one({'User ID': user_id})
 
@@ -261,11 +262,14 @@ def past_trips(n):
 
         if num_trips < n:
             n = num_trips
-        for i in range(n):
+        for i in range(10):
             response[f"{i}"] = trip_history[i]
-            print(trip_history[i])
+            #print(trip_history[i])
+        print(response)
+        trip_list = [{key: value[i] for i, key in enumerate(['transportation', 'link', 'location', 'destination'])} for key, value in response.items()]
+        response = jsonify({'trips': trip_list})
 
-        return(response)
+        return response
 
     else:
         print(f"No user found with ID: {user_id}")
