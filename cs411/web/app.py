@@ -287,7 +287,7 @@ def past_trips():
         if num_trips < n:
             n = num_trips
         for i in range(n):
-            response[f"{i}"] = trip_history[i]
+            response[f"{i}"] = trip_history[-1*(i+1)]
             print(trip_history[i])
             #print(trip_history[i])
         print(response)
