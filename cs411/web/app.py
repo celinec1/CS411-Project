@@ -42,18 +42,42 @@ def submit():
 
     global durations
     durations = directions.route_durations(location, destination, directions.api_key)
-    #durations = list[durations]
-    
+    # durations = list[durations]
+
     global loco_data
     loco_data = [location, destination]
-    #user_data.update(loco_data) #idk why but commenting out this line breaks everything LOL
-    #collection.insert_one(data)
+    # user_data.update(loco_data) #idk why but commenting out this line breaks everything LOL
+    # collection.insert_one(data)
 
     recommended = recommendations.main(location, destination)
     temp, condition = weather.get_weather(((directions.validate_address(location, directions.api_key))[1]), weather.api_key)
 
+    response = {}
 
-    response = {'driving' : durations['driving'][0], 'bicycling': durations['bicycling'][0], 'transit': durations['transit'][0], 'walking': durations['walking'][0], 'recommended' : recommended, 'temp': temp, 'condition': condition}
+    if 'driving' in durations:
+        response['driving'] = durations['driving'][0]
+    else:
+        response['driving'] = 'Driving mode not available'
+
+    if 'bicycling' in durations:
+        response['bicycling'] = durations['bicycling'][0]
+    else:
+        response['bicycling'] = 'Bicycling mode not available'
+
+    if 'transit' in durations:
+        response['transit'] = durations['transit'][0]
+    else:
+        response['transit'] = 'Transit mode not available'
+
+    if 'walking' in durations:
+        response['walking'] = durations['walking'][0]
+    else:
+        response['walking'] = 'Walking mode not available'
+
+    response['recommended'] = recommended
+    response['temp'] = temp
+    response['condition'] = condition
+
     print(response)
     return jsonify(response)
 

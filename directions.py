@@ -63,23 +63,24 @@ def route_durations(start, destination, api_key):
     modes = ['driving', 'bicycling', 'transit', 'walking']
     for mode in modes:
         directions_durations = get_directions_duration(start, destination, mode, api_key)
-        if directions_durations:
-            #print(directions_durations)
-            for modes, duration in directions_durations.items(): #this displays "transit" as "walking" not sure why
-                if mode != None:
-                    all_durations[mode] = duration
-    return(all_durations)
+        if directions_durations is not None:
+            all_durations.update(directions_durations)
+    
+    return all_durations
+
 
 def print_durations(durations):
-    for modes, duration in durations.items(): #this displays "transit" as "walking" not sure why
-        if modes != None:
-                print(f"{modes.capitalize()}: {duration[0]}") #prints mode from the list and not the dictionary
-
+    if durations:
+        for mode, duration in durations.items():
+            print(f"{mode.capitalize()}: {duration[0]}")
+    else:
+        print("No valid modes of transportation found.")
 
 
 #durations = route_durations(start, destination, api_key)
 #print_durations(durations)
 #print(get_directions_duration(start, destination, 'transit', api_key))
+
 
 
 

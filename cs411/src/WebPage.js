@@ -149,7 +149,7 @@ const WebPage = () => {
         <div className="transportation-selection">
           <h2>Select mode of transportation:</h2>
   
-          {driving && driving.length > 0 ? (
+          {driving && driving.length > 0 && (
             <div className="transportation-buttons">
               <div>
                 <button
@@ -161,13 +161,15 @@ const WebPage = () => {
                 <p>{driving}</p>
               </div>
             </div>
-          ) : (
+          )}
+  
+          {!driving && driving !== null && (
             <div>
-              <p>{!driving ? 'Driving mode not available' : 'No valid modes of transportation found'}</p>
+              <p>Driving mode not available</p>
             </div>
           )}
   
-          {bicycling && bicycling.length > 0 ? (
+          {bicycling && bicycling.length > 0 && (
             <div className="transportation-buttons">
               <div>
                 <button
@@ -179,13 +181,15 @@ const WebPage = () => {
                 <p>{bicycling}</p>
               </div>
             </div>
-          ) : (
+          )}
+  
+          {!bicycling && bicycling !== null && (
             <div>
-              <p>{!bicycling ? 'Bicycling mode not available' : 'No valid modes of transportation found'}</p>
+              <p>Bicycling mode not available</p>
             </div>
           )}
   
-          {transit && transit.length > 0 ? (
+          {transit && transit.length > 0 && (
             <div className="transportation-buttons">
               <div>
                 <button
@@ -197,13 +201,15 @@ const WebPage = () => {
                 <p>{transit}</p>
               </div>
             </div>
-          ) : (
+          )}
+  
+          {!transit && transit !== null && (
             <div>
-              <p>{!transit ? 'Transit mode not available' : 'No valid modes of transportation found'}</p>
+              <p>Transit mode not available</p>
             </div>
           )}
   
-          {walking && walking.length > 0 ? (
+          {walking && walking.length > 0 && (
             <div className="transportation-buttons">
               <div>
                 <button
@@ -215,11 +221,14 @@ const WebPage = () => {
                 <p>{walking}</p>
               </div>
             </div>
-          ) : (
+          )}
+  
+          {!walking && walking !== null && (
             <div>
-              <p>{!walking ? 'Walking mode not available' : 'No valid modes of transportation found'}</p>
+              <p>Walking mode not available</p>
             </div>
           )}
+  
   
           
 
