@@ -40,6 +40,13 @@ const Profile = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const renderLink = (text) => (
+    <a href={text} target="_blank" rel="noopener noreferrer">
+      {text}
+    </a>
+  );
+
+
   return (
     <div>
       <div className="navbar">
@@ -60,7 +67,8 @@ const Profile = () => {
             <Column title="Location" dataIndex="location" key="location" />
             <Column title="Destination" dataIndex="destination" key="destination" />
             <Column title="Transportation" dataIndex="transportation" key="transportation" />
-            <Column title="Link" dataIndex="link" key="link" />
+            {/* <Column title="Link" dataIndex="link" key="link" /> */}
+            <Column title="Link" dataIndex="link" key="link" render={renderLink} />
         </Table>
       </div>
     </div>
