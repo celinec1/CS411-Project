@@ -67,7 +67,6 @@ const Profile = () => {
             <Column title="Location" dataIndex="location" key="location" />
             <Column title="Destination" dataIndex="destination" key="destination" />
             <Column title="Transportation" dataIndex="transportation" key="transportation" />
-            {/* <Column title="Link" dataIndex="link" key="link" /> */}
             <Column title="Link" dataIndex="link" key="link" render={renderLink} />
         </Table>
       </div>
