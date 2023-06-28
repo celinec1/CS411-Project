@@ -20,6 +20,7 @@
   color: white;
   z-index: 1;
   padding: 2vw; 
+
 }
 
 .overlay-text {
@@ -27,7 +28,9 @@
   font-weight: bold;
   margin-top: 11vh; 
   margin-left: 10vw; 
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
+
 
 .body-text {
   font-size: 1.2vw; 
@@ -55,8 +58,36 @@
   padding: 1vw; 
   margin-left: 70vw; 
   margin-top: 6vh; 
+  animation: glow 2s ease-in-out infinite;
+  transition: transform 0.3s ease-in-out;
 }
 
 .login-button:hover {
   background-color: rgb(55, 111, 55);
+  animation: spiral-hover 2s linear infinite;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 15px rgba(126, 195, 126, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(126, 195, 126, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(126, 195, 126, 0.8);
+  }
+}
+
+@keyframes spiral-hover {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateX(10px) translateY(10px) rotate(10deg);
+  }
+  100%{
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+
 }
