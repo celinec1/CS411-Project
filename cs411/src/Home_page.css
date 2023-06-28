@@ -28,7 +28,7 @@
   font-weight: bold;
   margin-top: 11vh; 
   margin-left: 10vw; 
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 
@@ -39,6 +39,7 @@
   margin-left: 12vw;
   font-style: italic;
   color: rgb(126, 195, 126);
+  text-shadow: 0 0 7px rgba(255, 255, 255, 0.8);
 }
 
 .login-button {
@@ -72,7 +73,7 @@
     box-shadow: 0 0 15px rgba(126, 195, 126, 0.8);
   }
   50% {
-    box-shadow: 0 0 35px rgba(126, 195, 126, 0.8);
+    box-shadow: 0 0 30px rgba(126, 195, 126, 0.8);
   }
   100% {
     box-shadow: 0 0 15px rgba(126, 195, 126, 0.8);
