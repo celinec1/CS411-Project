@@ -1,3 +1,3 @@
 web: gunicorn cs411.web.app:app
 
-web: npm start --prefix CS411-Project
+web: cd CS411-Project && npm start
