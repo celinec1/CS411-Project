@@ -7,10 +7,10 @@ from urllib.parse import quote
 
 import sys
 # Get the grandparent directory of the current file (app.py)
-grandparent_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#grandparent_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Add grandparent directory to sys.path
-sys.path.append(grandparent_directory)
+#sys.path.append(grandparent_directory)
 
 import directions, weather, recommendations
 from pymongo import MongoClient
