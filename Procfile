@@ -1,3 +1,3 @@
-web: gunicorn cs411.web.app:app
+web: python3 web/app.py
 
 web: npm start
