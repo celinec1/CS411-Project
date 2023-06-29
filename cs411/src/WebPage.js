@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import LoadingSpinner from './loading';
 import './WebPage.css';
 
 const WebPage = () => {
@@ -15,6 +16,7 @@ const WebPage = () => {
   const [temp, setTemp] = useState(null);
   const [condition, setCondition] = useState(null);
   const [isRestarted, setIsRestarted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     console.log('backendResponse:', backendResponse);
@@ -36,6 +38,8 @@ const WebPage = () => {
   const handleProfile = () => {
     window.location.href = "http://localhost:3000/profile";
   };
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -86,6 +90,7 @@ const WebPage = () => {
   };
 
   const handleTransportationSubmit = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:8000/api/transportation', {
         method: 'POST',
@@ -104,10 +109,20 @@ const WebPage = () => {
       } else {
         console.log('Failed to fetch response from backend');
       }
+      setIsLoading(false);
     } catch (error) {
       console.log('Error:', error);
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="spinner-container">
+        <LoadingSpinner /> 
+      </div>
+    );
+  }
 
   if (!isFormSubmitted) {
     return (
