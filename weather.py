@@ -2,7 +2,7 @@ import requests
 import directions
 
 #pulls data from weatherapi, and using the geolocate call it is able to pull the data from the location the person is at
-api_key = "c4a56e33ea2e4d26801202756230506"
+api_key = ""
 
 def get_weather(zip, api_key):
     url = f"https://api.weatherapi.com/v1/current.json?q={zip}&key={api_key}"

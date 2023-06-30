@@ -1,7 +1,7 @@
 import requests
 
 #api key
-api_key = 'AIzaSyD8hzf6RtCQ8ab6AYdt7M6J-Nr2tgvuz0M'
+api_key = ''
 start = '808 Commonwealth Ave Boston, MA'
 destination = '528 Beacon St Boston, MA'
 

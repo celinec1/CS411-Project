@@ -122,7 +122,7 @@ def index():
     # Construct the authorization URL
     auth_url = 'https://accounts.spotify.com/authorize'
     auth_params = {
-        'client_id': '3a35c0bb12b54e1f8f0602a408bc6bf3',
+        'client_id': '',
         'response_type': 'code',
         'redirect_uri': quote('http://localhost:8000/callback', safe=''),
         'scope': 'user-read-private user-read-email user-top-read playlist-modify-private',
@@ -210,8 +210,8 @@ def callback():
     # Step 3: Exchange authorization code for access token
     token_url = 'https://accounts.spotify.com/api/token'
     token_data = {
-        'client_id': '3a35c0bb12b54e1f8f0602a408bc6bf3',
-        'client_secret': '17391461037d4d1788e03c089bd4319d',
+        'client_id': '',
+        'client_secret': '',
         'grant_type': 'authorization_code',
         'code': authorization_code,
         'redirect_uri': 'http://localhost:8000/callback',

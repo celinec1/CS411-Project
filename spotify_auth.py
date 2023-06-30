@@ -2,8 +2,8 @@ import requests
 from urllib.parse import quote
 
 # Client credentials
-client_id = '476e0a1be7ca4f1b91f367e2d4de4499'
-client_secret = '9fe88c7b05114882bb61a281545c4f1b'
+client_id = ''
+client_secret = ''
 redirect_uri = 'http://127.0.0.1:5000/'
 
 # Step 1: Authorization - Redirect user to Spotify's authorization page
